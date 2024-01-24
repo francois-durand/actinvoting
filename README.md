@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/francois-durand/actinvoting)](https://github.com/francois-durand/actinvoting/blob/main/LICENSE)
 [![Code Coverage](https://codecov.io/gh/francois-durand/actinvoting/branch/main/graphs/badge.svg)](https://codecov.io/gh/francois-durand/actinvoting/tree/main)
 
-Actinvoting uses mathematical tools from analytic combinatorics to compute probabilities in voting theory.
+Actinvoting uses mathematical tools from analytic combinatorics to compute probabilities in voting theory...
 
 
 - Free software: MIT license
