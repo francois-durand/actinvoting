@@ -557,6 +557,8 @@ document.write(`
 <span class="sd">        0</span>
 <span class="sd">        &gt;&gt;&gt; profile.nb_condorcet_winners</span>
 <span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; profile.exists_condorcet_winner</span>
+<span class="sd">        True</span>
 <span class="sd">        &gt;&gt;&gt; profile.is_weak_condorcet_winner</span>
 <span class="sd">        array([ True, False, False])</span>
 <span class="sd">        &gt;&gt;&gt; profile.weak_condorcet_winners</span>
@@ -585,6 +587,8 @@ document.write(`
 <span class="sd">        -1</span>
 <span class="sd">        &gt;&gt;&gt; profile.nb_condorcet_winners</span>
 <span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; profile.exists_condorcet_winner</span>
+<span class="sd">        False</span>
 <span class="sd">        &gt;&gt;&gt; profile.is_weak_condorcet_winner</span>
 <span class="sd">        array([ True,  True, False])</span>
 <span class="sd">        &gt;&gt;&gt; profile.weak_condorcet_winners</span>
@@ -879,6 +883,13 @@ document.write(`
 <span class="sd">        int: Number of Condorcet winners. May be 0 or 1.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">condorcet_winners</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">exists_condorcet_winner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        bool: True if there exists a Condorcet winner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_condorcet_winner</span><span class="p">)</span>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">is_weak_condorcet_winner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

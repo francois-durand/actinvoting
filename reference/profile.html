@@ -42,8 +42,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/profile';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="../contributing.html" />
-    <link rel="prev" title="CulturePlackettLuce" href="culture_plackett_luce.html" />
+    <link rel="next" title="util" href="util.html" />
+    <link rel="prev" title="probability_monte_carlo" href="probability_monte_carlo.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -414,8 +414,11 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="culture.html">Culture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_impartial.html">CultureImpartial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_mallows.html">CultureMallows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_plackett_luce.html">CulturePlackettLuce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probability_monte_carlo.html">probability_monte_carlo</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">util</a></li>
 </ul>
 </div>
 </nav></div>
@@ -575,6 +578,8 @@ over time. Instead, use the constructors which explicitly specify the input form
 <span class="go">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">nb_condorcet_winners</span>
 <span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">exists_condorcet_winner</span>
+<span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">is_weak_condorcet_winner</span>
 <span class="go">array([ True, False, False])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">weak_condorcet_winners</span>
@@ -603,6 +608,8 @@ over time. Instead, use the constructors which explicitly specify the input form
 <span class="go">-1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">nb_condorcet_winners</span>
 <span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">exists_condorcet_winner</span>
+<span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">is_weak_condorcet_winner</span>
 <span class="go">array([ True,  True, False])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">weak_condorcet_winners</span>
@@ -678,6 +685,17 @@ over time. Instead, use the constructors which explicitly specify the input form
 <dt class="sig sig-object py" id="actinvoting.Profile.exists_condorcet_order">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exists_condorcet_order</span></span><a class="headerlink" href="#actinvoting.Profile.exists_condorcet_order" title="Link to this definition">#</a></dt>
 <dd><p>True if the majority relation is transitive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="actinvoting.Profile.exists_condorcet_winner">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exists_condorcet_winner</span></span><a class="headerlink" href="#actinvoting.Profile.exists_condorcet_winner" title="Link to this definition">#</a></dt>
+<dd><p>True if there exists a Condorcet winner.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
@@ -917,20 +935,20 @@ candidate <cite>d</cite>. By convention, diagonal coefficients are set to 0.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="culture_plackett_luce.html"
+       href="probability_monte_carlo.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">CulturePlackettLuce</p>
+        <p class="prev-next-title">probability_monte_carlo</p>
       </div>
     </a>
     <a class="right-next"
-       href="../contributing.html"
+       href="util.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributing</p>
+        <p class="prev-next-title">util</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -957,6 +975,7 @@ candidate <cite>d</cite>. By convention, diagonal coefficients are set to 0.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.d_borda_multiplicity"><code class="docutils literal notranslate"><span class="pre">Profile.d_borda_multiplicity</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.d_ranking_multiplicity"><code class="docutils literal notranslate"><span class="pre">Profile.d_ranking_multiplicity</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.exists_condorcet_order"><code class="docutils literal notranslate"><span class="pre">Profile.exists_condorcet_order</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.exists_condorcet_winner"><code class="docutils literal notranslate"><span class="pre">Profile.exists_condorcet_winner</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.from_bordas"><code class="docutils literal notranslate"><span class="pre">Profile.from_bordas()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.from_d_borda_multiplicity"><code class="docutils literal notranslate"><span class="pre">Profile.from_d_borda_multiplicity()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.from_d_ranking_multiplicity"><code class="docutils literal notranslate"><span class="pre">Profile.from_d_ranking_multiplicity()</span></code></a></li>

@@ -45,7 +45,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/tutorial';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Second tutorial" href="answer.html" />
+    <link rel="next" title="Reference" href="../reference/index.html" />
     <link rel="prev" title="Tutorials" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -415,8 +415,6 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Actinvoting (Analytic Combinatorics Tools In Voting) Tutorial</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="answer.html">Second tutorial</a></li>
 </ul>
 </div>
 </nav></div>
@@ -476,35 +474,28 @@ document.write(`
                   
   <section id="Actinvoting-(Analytic-Combinatorics-Tools-In-Voting)-Tutorial">
 <h1>Actinvoting (Analytic Combinatorics Tools In Voting) Tutorial<a class="headerlink" href="#Actinvoting-(Analytic-Combinatorics-Tools-In-Voting)-Tutorial" title="Link to this heading">#</a></h1>
-<p>To facilitate the writing of your documentation, you can write Notebooks. Once included they will be rendered as the rest of your documentation pages!</p>
-<p>By default, PH3 creates a <code class="docutils literal notranslate"><span class="pre">tutorials</span></code> folder inside <code class="docutils literal notranslate"><span class="pre">docs</span></code>:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code> has a link to <code class="docutils literal notranslate"><span class="pre">tutorials/index.rst</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">docs/tutorials/index.rst</span></code> as a link to the notebook(s).</p></li>
-</ul>
-<p>Feel free to adapt to your needs!</p>
-<p>The &lt;h*&gt; structure of your notebook (<code class="docutils literal notranslate"><span class="pre">#</span></code>/<code class="docutils literal notranslate"><span class="pre">##</span></code>/…) will be applied to the navigation bar of your documentation. The actual filenames are ignored.</p>
-<p>In particular:</p>
-<ul class="simple">
-<li><p>Each notebook is rendered as a single webpage…</p></li>
-<li><p>But you can create more than one entry with one unique notebook</p></li>
-</ul>
-<section id="How-to-use-MyClass1">
-<h2>How to use MyClass1<a class="headerlink" href="#How-to-use-MyClass1" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">actinvoting</span> <span class="kn">import</span> <span class="n">MyClass1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">actinvoting</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">culture</span> <span class="o">=</span> <span class="n">CultureMallows</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mf">.9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc1</span> <span class="o">=</span> <span class="n">MyClass1</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">51</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">mc1</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">profile</span> <span class="o">=</span> <span class="n">culture</span><span class="o">.</span><span class="n">random_profile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -513,31 +504,22 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(a, b) = 42, 51
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc1</span><span class="o">.</span><span class="n">a_square</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-1764
+Profile((0, 1, 2, 3, 4): 1,
+        (0, 3, 4, 2, 1): 1,
+        (1, 0, 2, 3, 4): 1,
+        (1, 2, 0, 4, 3): 2,
+        (2, 0, 4, 1, 3): 1,
+        (3, 2, 0, 4, 1): 1,
+        (3, 4, 0, 1, 2): 1,
+        (4, 2, 1, 3, 0): 1,
+        (4, 3, 1, 2, 0): 1)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc1</span><span class="o">.</span><span class="n">divide_a_by_c_and_add_d</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">profile</span><span class="o">.</span><span class="n">exists_condorcet_winner</span>
 </pre></div>
 </div>
 </div>
@@ -547,65 +529,50 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-47.0
+False
 </pre></div></div>
 </div>
-</section>
-<section id="How-to-use-MyClass2">
-<h2>How to use MyClass2<a class="headerlink" href="#How-to-use-MyClass2" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">actinvoting</span> <span class="kn">import</span> <span class="n">MyClass2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">random_profile</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">culture</span><span class="o">.</span><span class="n">random_profile</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc2</span> <span class="o">=</span> <span class="n">MyClass2</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">mc2</span><span class="o">.</span><span class="n">addition</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">profile</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">profile</span><span class="o">.</span><span class="n">exists_condorcet_winner</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-13
-</pre></div></div>
-</div>
-</section>
-</section>
-<section id="Advanced-Tutorial-Where-we-Display-Graphs">
-<h1>Advanced Tutorial Where we Display Graphs<a class="headerlink" href="#Advanced-Tutorial-Where-we-Display-Graphs" title="Link to this heading">#</a></h1>
-<p>One nice feature of using notebooks is that it is very easy to add graphs to your documentation.</p>
-<p>Don’t forget to add the graphic packages you need to your poetry dependencies!</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="n">x</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="o">/</span><span class="mi">100</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">400</span><span class="p">)]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$x^2$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probability_monte_carlo</span><span class="p">(</span><span class="n">factory</span><span class="o">=</span><span class="n">random_profile</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_12_0.png" src="../_images/tutorials_tutorial_12_0.png" />
+<div class="highlight"><pre>
+0.4145
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </div>
 </section>
@@ -630,11 +597,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="answer.html"
+       href="../reference/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Second tutorial</p>
+        <p class="prev-next-title">Reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -646,23 +613,6 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Actinvoting (Analytic Combinatorics Tools In Voting) Tutorial</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#How-to-use-MyClass1">How to use MyClass1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#How-to-use-MyClass2">How to use MyClass2</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#Advanced-Tutorial-Where-we-Display-Graphs">Advanced Tutorial Where we Display Graphs</a></li>
-</ul>
-
-  </nav></div>
 
   <div class="sidebar-secondary-item">
 
