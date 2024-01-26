@@ -102,6 +102,8 @@ class Profile:
         0
         >>> profile.nb_condorcet_winners
         1
+        >>> profile.exists_condorcet_winner
+        True
         >>> profile.is_weak_condorcet_winner
         array([ True, False, False])
         >>> profile.weak_condorcet_winners
@@ -130,6 +132,8 @@ class Profile:
         -1
         >>> profile.nb_condorcet_winners
         0
+        >>> profile.exists_condorcet_winner
+        False
         >>> profile.is_weak_condorcet_winner
         array([ True,  True, False])
         >>> profile.weak_condorcet_winners
@@ -406,6 +410,13 @@ class Profile:
         int: Number of Condorcet winners. May be 0 or 1.
         """
         return len(self.condorcet_winners)
+
+    @cached_property
+    def exists_condorcet_winner(self):
+        """
+        bool: True if there exists a Condorcet winner.
+        """
+        return np.any(self.is_condorcet_winner)
 
     @cached_property
     def is_weak_condorcet_winner(self):
