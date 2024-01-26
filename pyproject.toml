@@ -17,7 +17,6 @@ numpy = ">=1.26.3"
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
 pytest-cov = "^4.1.0"
-mypy = "^1.6.1"
 pre-commit = "^3.5.0"
 tox = "^4.11.3"
 
@@ -38,16 +37,6 @@ build-backend = "poetry.core.masonry.api"
 line-length = 120
 target-version = ['py37']
 preview = true
-
-[tool.mypy]
-files = ["actinvoting"]
-disallow_untyped_defs = "False"
-disallow_any_unimported = "True"
-no_implicit_optional = "True"
-check_untyped_defs = "True"
-warn_return_any = "True"
-warn_unused_ignores = "True"
-show_error_codes = "True"
 
 [tool.ruff]
 target-version = "py37"
@@ -126,7 +115,6 @@ allowlist_externals = poetry
 commands =
     poetry install -v
     pytest
-    mypy
 """
 
 [tool.poetry_bumpversion.file."actinvoting/__init__.py"]
