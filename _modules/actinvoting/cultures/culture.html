@@ -452,6 +452,7 @@ document.write(`
                   
   <h1>Source code for actinvoting.cultures.culture</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">actinvoting.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
 
@@ -601,6 +602,35 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># The default implementation uses `random_borda` as subroutine.</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random_profile_using_random_borda</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Culture.proba_high_low">
+<a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.proba_high_low">[docs]</a>
+    <span class="k">def</span> <span class="nf">proba_high_low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Probability that a random ranking places candidate `c` below certain ones and above the other ones.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        c: int</span>
+<span class="sd">            A candidate.</span>
+<span class="sd">        higher: Set</span>
+<span class="sd">            The candidates that should be higher.</span>
+<span class="sd">        lower: Set</span>
+<span class="sd">            The candidates that should be lower. Note that together, `c`, `higher` and `lower` must cover all the</span>
+<span class="sd">            candidates.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Probability that for a random ranking in this culture, candidates from `higher` are higher than `c` and</span>
+<span class="sd">            those from `lower` are lower than `c`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proba_ranking</span><span class="p">([</span><span class="o">*</span><span class="n">ranking_higher</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">ranking_lower</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">ranking_higher</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">higher</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">ranking_lower</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
+        <span class="p">])</span></div>
 </div>
 
 </pre></div>

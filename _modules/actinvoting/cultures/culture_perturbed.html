@@ -483,6 +483,11 @@ document.write(`
 <span class="sd">    As expected, there are approximately 5000 voters `(0, 1, 2)` due to the Dirac part, and the other 5000 voters</span>
 <span class="sd">    are approximately equally shared between all rankings, including the pole.</span>
 
+<span class="sd">        &gt;&gt;&gt; culture.proba_high_low(c=0, higher={}, lower={1, 2})</span>
+<span class="sd">        0.6666666666666666</span>
+<span class="sd">        &gt;&gt;&gt; culture.proba_high_low(c=1, higher={}, lower={0, 2})</span>
+<span class="sd">        0.16666666666666666</span>
+
 <span class="sd">    Particular case of a Dirac:</span>
 
 <span class="sd">        &gt;&gt;&gt; culture = CulturePerturbed(m=6, theta=1)</span>
@@ -576,6 +581,15 @@ document.write(`
 <a class="viewcode-back" href="../../../reference/culture_perturbed.html#actinvoting.CulturePerturbed.random_profile">[docs]</a>
     <span class="k">def</span> <span class="nf">random_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random_profile_using_random_borda</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CulturePerturbed.proba_high_low">
+<a class="viewcode-back" href="../../../reference/culture_perturbed.html#actinvoting.CulturePerturbed.proba_high_low">[docs]</a>
+    <span class="k">def</span> <span class="nf">proba_high_low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">):</span>
+        <span class="n">proba</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">higher</span><span class="p">))</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lower</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proba_other_ranking</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">higher</span><span class="p">)</span> <span class="o">==</span> <span class="n">c</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="n">h</span> <span class="o">&lt;</span> <span class="n">c</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">higher</span><span class="p">]):</span>
+            <span class="n">proba</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span>
+        <span class="k">return</span> <span class="n">proba</span></div>
 </div>
 
 </pre></div>
