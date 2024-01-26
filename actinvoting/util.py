@@ -23,7 +23,9 @@ def borda_from_ranking(ranking):
         [3, 2, 5, 1, 0, 4]
     """
     m = len(ranking)
-    return m - 1 - np.argsort(ranking)
+    borda = np.zeros(m, int)
+    borda[np.array(ranking)] = np.arange(m - 1, -1, -1)
+    return borda
 
 
 def ranking_from_borda(borda):
@@ -46,9 +48,11 @@ def ranking_from_borda(borda):
         [0, 1, 2, 3, 4, 5]
         >>> list(ranking_from_borda([3, 2, 5, 1, 0, 4]))
         [2, 5, 0, 1, 3, 4]
-
     """
-    return np.argsort(-np.array(borda))
+    m = len(borda)
+    ranking = np.zeros(m, int)
+    ranking[m - 1 - np.array(borda)] = np.arange(m)
+    return ranking
 
 
 def kendall_tau_id_ranking(ranking):
