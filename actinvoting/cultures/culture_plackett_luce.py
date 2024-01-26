@@ -1,6 +1,7 @@
 import numpy as np
 from actinvoting.cultures.culture import Culture
 from actinvoting.util import ranking_from_borda, borda_from_ranking
+from actinvoting.util_cache import cached_property
 
 
 class CulturePlackettLuce(Culture):
@@ -27,7 +28,10 @@ class CulturePlackettLuce(Culture):
     def __init__(self, values, seed):
         super().__init__(m=len(values), seed=seed)
         self.values = np.array(values)
-        self.values_normalized = self.values / self.values.sum()
+
+    @cached_property
+    def values_normalized(self):
+        return self.values / self.values.sum()
 
     def proba_ranking(self, ranking):
         return np.prod(self.values[ranking[::-1]] / np.cumsum(self.values[ranking[::-1]]))

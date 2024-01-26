@@ -1,6 +1,7 @@
 import numpy as np
 from actinvoting.cultures.culture import Culture
 from actinvoting.util import kendall_tau_id_ranking, kendall_tau_id_borda, borda_from_ranking
+from actinvoting.util_cache import cached_property
 
 
 class CultureMallows(Culture):
@@ -48,8 +49,14 @@ class CultureMallows(Culture):
         1.0
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
         0.0
+        >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
+        1.0
+        >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
+        0.0
         >>> list(culture.random_ranking())
         [0, 1, 2, 3, 4, 5]
+        >>> list(culture.random_borda())
+        [5, 4, 3, 2, 1, 0]
 
     Particular case of the Impartial Culture:
 
@@ -72,8 +79,14 @@ class CultureMallows(Culture):
         0.001388888888888889
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
         0.001388888888888889
+        >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
+        0.001388888888888889
+        >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
+        0.001388888888888889
         >>> list(culture.random_ranking())
         [5, 2, 3, 0, 1, 4]
+        >>> list(culture.random_borda())
+        [3, 4, 0, 2, 1, 5]
 
     References
     ----------
@@ -87,13 +100,25 @@ class CultureMallows(Culture):
     def __init__(self, m, phi, seed=None):
         super().__init__(m=m, seed=seed)
         self.phi = phi
-        self.powers_of_phi = phi**np.arange(m)
-        self.powers_of_phi_cumsum = self.powers_of_phi.cumsum()
-        self.d_candidate_insertion_probas = {
+
+    @cached_property
+    def powers_of_phi(self):
+        return self.phi**np.arange(self.m)
+
+    @cached_property
+    def powers_of_phi_cumsum(self):
+        return self.powers_of_phi.cumsum()
+
+    @cached_property
+    def d_candidate_insertion_probas(self):
+        return {
             candidate: self.powers_of_phi[:candidate + 1] / self.powers_of_phi_cumsum[candidate]
             for candidate in range(self.m)
         }
-        self.normalization_constant = np.prod(self.powers_of_phi_cumsum)
+
+    @cached_property
+    def normalization_constant(self):
+        return np.prod(self.powers_of_phi_cumsum)
 
     def proba_ranking(self, ranking):
         return self.phi ** kendall_tau_id_ranking(ranking) / self.normalization_constant
@@ -102,6 +127,7 @@ class CultureMallows(Culture):
         return self.phi ** kendall_tau_id_borda(borda) / self.normalization_constant
 
     def random_ranking(self):
+        # We use the Repeated Insertion Model or RIM (cf. references in the docstring of the class).
         ranking_worst_to_best = []
         for candidate in range(self.m):
             insertion_index = self.rng.choice(

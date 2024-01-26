@@ -1,5 +1,6 @@
 from math import factorial
 from actinvoting.cultures.culture import Culture
+from actinvoting.util_cache import cached_property
 
 
 class CultureImpartial(Culture):
@@ -19,11 +20,15 @@ class CultureImpartial(Culture):
         [2, 4, 0, 1, 3, 5]
     """
 
-    def proba_ranking(self, ranking):
+    @cached_property
+    def _proba_any_ranking(self):
         return 1 / factorial(self.m)
 
+    def proba_ranking(self, ranking):
+        return self._proba_any_ranking
+
     def proba_borda(self, borda):
-        return 1 / factorial(self.m)
+        return self._proba_any_ranking
 
     def random_ranking(self):
         return self.rng.permutation(self.m)
