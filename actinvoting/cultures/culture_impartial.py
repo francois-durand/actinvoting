@@ -18,6 +18,8 @@ class CultureImpartial(Culture):
         [3, 2, 5, 4, 1, 0]
         >>> list(culture.random_borda())
         [2, 4, 0, 1, 3, 5]
+        >>> culture.proba_high_low(c=0, higher=set(), lower={1, 2, 3, 4, 5})
+        0.16666666666666666
     """
 
     @cached_property
@@ -38,3 +40,6 @@ class CultureImpartial(Culture):
 
     def random_profile(self, n):
         return self._random_profile_using_random_borda(n)
+
+    def proba_high_low(self, c, higher, lower):
+        return factorial(len(higher)) * factorial(len(lower)) / factorial(self.m)

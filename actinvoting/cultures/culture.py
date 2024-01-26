@@ -1,4 +1,5 @@
 from collections import defaultdict
+from itertools import permutations
 import numpy as np
 from actinvoting.profile import Profile
 
@@ -132,3 +133,29 @@ class Culture:
         """
         # The default implementation uses `random_borda` as subroutine.
         return self._random_profile_using_random_borda(n)
+
+    def proba_high_low(self, c, higher, lower):
+        """
+        Probability that a random ranking places candidate `c` below certain ones and above the other ones.
+
+        Parameters
+        ----------
+        c: int
+            A candidate.
+        higher: Set
+            The candidates that should be higher.
+        lower: Set
+            The candidates that should be lower. Note that together, `c`, `higher` and `lower` must cover all the
+            candidates.
+
+        Returns
+        -------
+        float
+            Probability that for a random ranking in this culture, candidates from `higher` are higher than `c` and
+            those from `lower` are lower than `c`.
+        """
+        return np.sum([
+            self.proba_ranking([*ranking_higher, c, *ranking_lower])
+            for ranking_higher in permutations(higher)
+            for ranking_lower in permutations(lower)
+        ])

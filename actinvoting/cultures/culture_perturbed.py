@@ -28,6 +28,11 @@ class CulturePerturbed(Culture):
     As expected, there are approximately 5000 voters `(0, 1, 2)` due to the Dirac part, and the other 5000 voters
     are approximately equally shared between all rankings, including the pole.
 
+        >>> culture.proba_high_low(c=0, higher={}, lower={1, 2})
+        0.6666666666666666
+        >>> culture.proba_high_low(c=1, higher={}, lower={0, 2})
+        0.16666666666666666
+
     Particular case of a Dirac:
 
         >>> culture = CulturePerturbed(m=6, theta=1)
@@ -107,3 +112,9 @@ class CulturePerturbed(Culture):
 
     def random_profile(self, n):
         return self._random_profile_using_random_borda(n)
+
+    def proba_high_low(self, c, higher, lower):
+        proba = factorial(len(higher)) * factorial(len(lower)) * self._proba_other_ranking
+        if len(higher) == c and all([h < c for h in higher]):
+            proba += self.theta
+        return proba
