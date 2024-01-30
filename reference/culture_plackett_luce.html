@@ -483,15 +483,19 @@ document.write(`
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">actinvoting.</span></span><span class="sig-name descname"><span class="pre">CulturePlackettLuce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/actinvoting/cultures/culture_plackett_luce.html#CulturePlackettLuce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actinvoting.CulturePlackettLuce" title="Link to this definition">#</a></dt>
 <dd><p>Placket-Luce Culture.</p>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span> <span class="o">=</span> <span class="n">CulturePlackettLuce</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.7</span><span class="p">,</span> <span class="mf">.3</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span> <span class="o">=</span> <span class="n">CulturePlackettLuce</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">m</span>
 <span class="go">6</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">culture</span><span class="o">.</span><span class="n">values_normalized</span><span class="p">)</span>
-<span class="go">[0.25, 0.35, 0.15, 0.1, 0.05, 0.1]</span>
+<span class="go">[1/4, 7/20, 3/20, 1/10, 1/20, 1/10]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">proba_ranking</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="go">0.002745098039215686</span>
+<span class="go">7/2550</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">proba_borda</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="go">0.002745098039215686</span>
+<span class="go">7/2550</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">culture</span><span class="o">.</span><span class="n">random_ranking</span><span class="p">())</span>
 <span class="go">[3, 1, 4, 2, 0, 5]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">culture</span><span class="o">.</span><span class="n">random_borda</span><span class="p">())</span>
@@ -510,7 +514,7 @@ document.write(`
 <dd class="field-even"><p>The probability to draw this ranking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or sympy expr</p>
 </dd>
 </dl>
 </dd></dl>
@@ -527,7 +531,7 @@ document.write(`
 <dd class="field-even"><p>The probability to draw this ranking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or sympy expr</p>
 </dd>
 </dl>
 </dd></dl>

@@ -453,7 +453,12 @@ document.write(`
   <h1>Source code for actinvoting.cultures.culture</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span>
+<span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">powerset</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
 <span class="kn">from</span> <span class="nn">actinvoting.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
 
 
@@ -493,7 +498,7 @@ document.write(`
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float</span>
+<span class="sd">        float or sympy expr</span>
 <span class="sd">            The probability to draw this ranking.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
@@ -512,7 +517,7 @@ document.write(`
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        float</span>
+<span class="sd">        float or sympy expr</span>
 <span class="sd">            The probability to draw this ranking.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
@@ -631,7 +636,44 @@ document.write(`
             <span class="k">for</span> <span class="n">ranking_higher</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">higher</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">ranking_lower</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
         <span class="p">])</span></div>
-</div>
+
+
+    <span class="k">def</span> <span class="nf">polynom_of_duels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="n">other_candidates</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="p">{</span><span class="n">c</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proba_high_low</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">higher</span><span class="p">),</span> <span class="n">other_candidates</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">higher</span><span class="p">))</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">higher</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">higher</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">other_candidates</span><span class="p">)</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">rational_fraction_condorcet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
+        <span class="n">other_candidates</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="p">{</span><span class="n">c</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">**</span><span class="n">alpha</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">other_candidates</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">zeta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rational_fraction_condorcet</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">f_lambdified</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]],</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">f_vector_input</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f_lambdified</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">f_vector_input</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">jacobian_of_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]])</span>
+
+    <span class="k">def</span> <span class="nf">hessian_of_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]])</span></div>
 
 </pre></div>
 
