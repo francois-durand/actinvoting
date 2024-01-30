@@ -1,4 +1,6 @@
 import numpy as np
+import sympy
+
 from actinvoting.cultures.culture import Culture
 from actinvoting.util import kendall_tau_id_ranking, kendall_tau_id_borda, borda_from_ranking
 from actinvoting.util_cache import cached_property
@@ -14,7 +16,7 @@ class CultureMallows(Culture):
     --------
     Usual case:
 
-        >>> culture = CultureMallows(m=3, phi=.5, seed=42)
+        >>> culture = CultureMallows(m=3, phi=sympy.Rational(1, 2), seed=42)
         >>> profile = culture.random_profile(n=10000)
         >>> print(profile)
         Profile((0, 1, 2): 3766,
@@ -30,29 +32,29 @@ class CultureMallows(Culture):
 
     Particular case of a Dirac:
 
-        >>> culture = CultureMallows(m=6, phi=0)
+        >>> culture = CultureMallows(m=6, phi=sympy.Integer(0))
         >>> list(culture.powers_of_phi)
         [1, 0, 0, 0, 0, 0]
         >>> list(culture.powers_of_phi_cumsum)
         [1, 1, 1, 1, 1, 1]
         >>> for candidate, insertion_probas in culture.d_candidate_insertion_probas.items():
         ...     print(candidate, list(insertion_probas))
-        0 [1.0]
-        1 [1.0, 0.0]
-        2 [1.0, 0.0, 0.0]
-        3 [1.0, 0.0, 0.0, 0.0]
-        4 [1.0, 0.0, 0.0, 0.0, 0.0]
-        5 [1.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        0 [1]
+        1 [1, 0]
+        2 [1, 0, 0]
+        3 [1, 0, 0, 0]
+        4 [1, 0, 0, 0, 0]
+        5 [1, 0, 0, 0, 0, 0]
         >>> culture.normalization_constant
         1
         >>> culture.proba_ranking([0, 1, 2, 3, 4, 5])
-        1.0
+        1
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
-        0.0
+        0
         >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
-        1.0
+        1
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
-        0.0
+        0
         >>> list(culture.random_ranking())
         [0, 1, 2, 3, 4, 5]
         >>> list(culture.random_borda())
@@ -60,29 +62,29 @@ class CultureMallows(Culture):
 
     Particular case of the Impartial Culture:
 
-        >>> culture = CultureMallows(m=6, phi=1, seed=42)
+        >>> culture = CultureMallows(m=6, phi=sympy.Integer(1), seed=42)
         >>> list(culture.powers_of_phi)
         [1, 1, 1, 1, 1, 1]
         >>> list(culture.powers_of_phi_cumsum)
         [1, 2, 3, 4, 5, 6]
         >>> for candidate, insertion_probas in culture.d_candidate_insertion_probas.items():
         ...     print(candidate, list(insertion_probas))
-        0 [1.0]
-        1 [0.5, 0.5]
-        2 [0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
-        3 [0.25, 0.25, 0.25, 0.25]
-        4 [0.2, 0.2, 0.2, 0.2, 0.2]
-        5 [0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666]
+        0 [1]
+        1 [1/2, 1/2]
+        2 [1/3, 1/3, 1/3]
+        3 [1/4, 1/4, 1/4, 1/4]
+        4 [1/5, 1/5, 1/5, 1/5, 1/5]
+        5 [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]
         >>> culture.normalization_constant
         720
         >>> culture.proba_ranking([0, 1, 2, 3, 4, 5])
-        0.001388888888888889
+        1/720
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
-        0.001388888888888889
+        1/720
         >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
-        0.001388888888888889
+        1/720
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
-        0.001388888888888889
+        1/720
         >>> list(culture.random_ranking())
         [5, 2, 3, 0, 1, 4]
         >>> list(culture.random_borda())
@@ -117,6 +119,13 @@ class CultureMallows(Culture):
         }
 
     @cached_property
+    def d_candidate_insertion_probas_as_floats(self):
+        return {
+            candidate: np.array(insertion_probas, dtype=float)
+            for candidate, insertion_probas in self.d_candidate_insertion_probas.items()
+        }
+
+    @cached_property
     def normalization_constant(self):
         return np.prod(self.powers_of_phi_cumsum)
 
@@ -131,7 +140,7 @@ class CultureMallows(Culture):
         ranking_worst_to_best = []
         for candidate in range(self.m):
             insertion_index = self.rng.choice(
-                candidate + 1, size=1, p=self.d_candidate_insertion_probas[candidate]
+                candidate + 1, size=1, p=self.d_candidate_insertion_probas_as_floats[candidate]
             )[0]
             ranking_worst_to_best.insert(insertion_index, candidate)
         return np.array(ranking_worst_to_best[::-1])

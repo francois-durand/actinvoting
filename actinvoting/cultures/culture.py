@@ -1,6 +1,11 @@
 from collections import defaultdict
 from itertools import permutations
+
 import numpy as np
+import sympy
+from more_itertools import powerset
+from scipy.optimize import minimize
+
 from actinvoting.profile import Profile
 
 
@@ -36,7 +41,7 @@ class Culture:
 
         Returns
         -------
-        float
+        float or sympy expr
             The probability to draw this ranking.
         """
         raise NotImplementedError
@@ -52,7 +57,7 @@ class Culture:
 
         Returns
         -------
-        float
+        float or sympy expr
             The probability to draw this ranking.
         """
         raise NotImplementedError
@@ -159,3 +164,40 @@ class Culture:
             for ranking_higher in permutations(higher)
             for ranking_lower in permutations(lower)
         ])
+
+    def polynom_of_duels(self, c):
+        x = sympy.symarray("x", self.m)
+        candidates = set(range(self.m))
+        other_candidates = candidates - {c}
+        return sympy.Add(*[
+            self.proba_high_low(c, set(higher), other_candidates - set(higher)) * sympy.Mul(*[x[d] for d in higher])
+            for higher in powerset(other_candidates)
+        ])
+
+    def rational_fraction_condorcet(self, c, alpha=None):
+        if alpha is None:
+            alpha = [sympy.Rational(1, 2)] * self.m
+        x = sympy.symarray("x", self.m)
+        candidates = set(range(self.m))
+        other_candidates = candidates - {c}
+        return self.polynom_of_duels(c) / sympy.Mul(*[x[d]**alpha[d] for d in other_candidates])
+
+    def zeta(self, c, alpha=None):
+        x = sympy.symarray("x", self.m)
+        f = self.rational_fraction_condorcet(c=c, alpha=alpha)
+        f_lambdified = sympy.lambdify([*x[:c], *x[c + 1:]], f, "numpy")
+
+        def f_vector_input(v):
+            return f_lambdified(*v)
+        res = minimize(f_vector_input, [1.0] * (self.m - 1))
+        return res.x
+
+    def jacobian_of_p(self, c):
+        x = sympy.symarray("x", self.m)
+        p = self.polynom_of_duels(c=c)
+        return sympy.tensor.array.derive_by_array(p, [*x[:c], *x[c + 1:]])
+
+    def hessian_of_p(self, c):
+        x = sympy.symarray("x", self.m)
+        p = self.polynom_of_duels(c=c)
+        return sympy.hessian(p, [*x[:c], *x[c + 1:]])

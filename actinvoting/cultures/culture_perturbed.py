@@ -1,5 +1,5 @@
-from math import factorial
 import numpy as np
+import sympy
 
 from actinvoting.cultures.culture import Culture
 from actinvoting.util_cache import cached_property
@@ -15,7 +15,7 @@ class CulturePerturbed(Culture):
     --------
     Usual case:
 
-        >>> culture = CulturePerturbed(m=3, theta=.5, seed=42)
+        >>> culture = CulturePerturbed(m=3, theta=sympy.Rational(1, 2), seed=42)
         >>> profile = culture.random_profile(n=10000)
         >>> print(profile)
         Profile((0, 1, 2): 5778,
@@ -29,21 +29,21 @@ class CulturePerturbed(Culture):
     are approximately equally shared between all rankings, including the pole.
 
         >>> culture.proba_high_low(c=0, higher={}, lower={1, 2})
-        0.6666666666666666
+        2/3
         >>> culture.proba_high_low(c=1, higher={}, lower={0, 2})
-        0.16666666666666666
+        1/6
 
     Particular case of a Dirac:
 
         >>> culture = CulturePerturbed(m=6, theta=1)
         >>> culture.proba_ranking([0, 1, 2, 3, 4, 5])
-        1.0
+        1
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
-        0.0
+        0
         >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
-        1.0
+        1
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
-        0.0
+        0
         >>> list(culture.random_ranking())
         [0, 1, 2, 3, 4, 5]
         >>> list(culture.random_borda())
@@ -53,13 +53,13 @@ class CulturePerturbed(Culture):
 
         >>> culture = CulturePerturbed(m=6, theta=0, seed=42)
         >>> culture.proba_ranking([0, 1, 2, 3, 4, 5])
-        0.001388888888888889
+        1/720
         >>> culture.proba_ranking([2, 5, 0, 1, 3, 4])
-        0.001388888888888889
+        1/720
         >>> culture.proba_borda([5, 4, 3, 2, 1, 0])
-        0.001388888888888889
+        1/720
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
-        0.001388888888888889
+        1/720
         >>> list(culture.random_ranking())
         [3, 4, 2, 0, 5, 1]
         >>> list(culture.random_borda())
@@ -72,11 +72,11 @@ class CulturePerturbed(Culture):
 
     @cached_property
     def _proba_pole(self):
-        return self.theta + (1 - self.theta) / factorial(self.m)
+        return self.theta + (1 - self.theta) / sympy.factorial(self.m)
 
     @cached_property
     def _proba_other_ranking(self):
-        return (1 - self.theta) / factorial(self.m)
+        return (1 - self.theta) / sympy.factorial(self.m)
 
     @cached_property
     def _pole_ranking(self):
@@ -114,7 +114,7 @@ class CulturePerturbed(Culture):
         return self._random_profile_using_random_borda(n)
 
     def proba_high_low(self, c, higher, lower):
-        proba = factorial(len(higher)) * factorial(len(lower)) * self._proba_other_ranking
+        proba = sympy.factorial(len(higher)) * sympy.factorial(len(lower)) * self._proba_other_ranking
         if len(higher) == c and all([h < c for h in higher]):
             proba += self.theta
         return proba
