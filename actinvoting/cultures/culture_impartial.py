@@ -42,5 +42,8 @@ class CultureImpartial(Culture):
     def random_profile(self, n):
         return self._random_profile_using_random_borda(n)
 
+    def average_profile(self):
+        return self._average_profile_using_proba_ranking
+
     def proba_high_low(self, c, higher, lower):
         return sympy.factorial(len(higher)) * sympy.factorial(len(lower)) / sympy.factorial(self.m)

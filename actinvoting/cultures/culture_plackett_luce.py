@@ -57,3 +57,6 @@ class CulturePlackettLuce(Culture):
 
     def random_profile(self, n):
         return self._random_profile_using_random_ranking(n)
+
+    def average_profile(self):
+        return self._average_profile_using_proba_ranking

@@ -7,6 +7,7 @@ from more_itertools import powerset
 from scipy.optimize import minimize
 
 from actinvoting.profile import Profile
+from actinvoting.util_cache import cached_property
 
 
 class Culture:
@@ -136,8 +137,33 @@ class Culture:
         Profile
             A random profile.
         """
-        # The default implementation uses `random_borda` as subroutine.
-        return self._random_profile_using_random_borda(n)
+        raise NotImplementedError
+
+    @cached_property
+    def _average_profile_using_proba_ranking(self):
+        return Profile.from_d_ranking_multiplicity({
+            ranking: self.proba_ranking(ranking)
+            for ranking in permutations(range(self.m))
+        })
+
+    @cached_property
+    def _average_profile_using_proba_borda(self):
+        return Profile.from_d_borda_multiplicity({
+            borda: self.proba_borda(borda)
+            for borda in permutations(range(self.m))
+        })
+
+    @cached_property
+    def average_profile(self):
+        """
+        Average profile.
+
+        Returns
+        -------
+        Profile
+            A profile where the weight for each ranking is the corresponding probability in the culture.
+        """
+        raise NotImplementedError
 
     def proba_high_low(self, c, higher, lower):
         """

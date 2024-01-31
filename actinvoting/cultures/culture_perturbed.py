@@ -113,6 +113,9 @@ class CulturePerturbed(Culture):
     def random_profile(self, n):
         return self._random_profile_using_random_borda(n)
 
+    def average_profile(self):
+        return self._average_profile_using_proba_ranking
+
     def proba_high_low(self, c, higher, lower):
         proba = sympy.factorial(len(higher)) * sympy.factorial(len(lower)) * self._proba_other_ranking
         if len(higher) == c and all([h < c for h in higher]):

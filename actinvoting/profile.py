@@ -1,5 +1,7 @@
 from collections import defaultdict
+
 import numpy as np
+
 from actinvoting.util import ranking_from_borda, borda_from_ranking
 from actinvoting.util_cache import cached_property
 
@@ -11,8 +13,8 @@ class Profile:
     Examples
     --------
     A profile can be represented in several ways: a dictionary associating ranking to multiplicities (number of voters),
-    an array of unique rankings and the corresponding vector of multiplicities, an array of possibly rankings with
-    possible repetitions, as well as all these possibilities with Borda vectors instead of rankings.
+    an array of unique rankings and the corresponding vector of multiplicities, as well as both these possibilities
+    with Borda vectors instead of rankings.
 
     You should avoid the default initialization method `Profile(...)`, because its syntax is quite likely to change
     over time. Instead, use the constructors which explicitly specify the input format:
@@ -30,6 +32,9 @@ class Profile:
         >>> Profile.from_unique_bordas_and_multiplicities(
         ...     unique_bordas=[[2, 1, 0], [1, 2, 0]], multiplicities=[3, 2])
         Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+
+    In the case where there is an integer number of voters for each ranking, you can also list the rankings or the
+    Borda vectors with repetitions:
 
         >>> Profile.from_rankings([
         ...     [0, 1, 2],
@@ -59,21 +64,9 @@ class Profile:
                [1, 0, 2]])
         >>> profile.unique_bordas  # DOCTEST: +ELLIPSIS
         array([[2, 1, 0],
-               [1, 2, 0]]...)
+               [1, 2, 0]])
         >>> profile.multiplicities
         array([3, 2])
-        >>> profile.rankings
-        array([[0, 1, 2],
-               [0, 1, 2],
-               [0, 1, 2],
-               [1, 0, 2],
-               [1, 0, 2]])
-        >>> profile.bordas  # DOCTEST: +ELLIPSIS
-        array([[2, 1, 0],
-               [2, 1, 0],
-               [2, 1, 0],
-               [1, 2, 0],
-               [1, 2, 0]]...)
 
     Features:
 
@@ -300,26 +293,6 @@ class Profile:
         ndarray: List of unique rankings in Borda format, in the same order as `unique_rankings`.
         """
         return np.array([borda_from_ranking(ranking) for ranking in self.unique_rankings])
-
-    @cached_property
-    def rankings(self):
-        """
-        ndarray: List of rankings with possible repetitions.
-        """
-        return np.vstack([
-            np.repeat([ranking], multiplicity, axis=0)
-            for ranking, multiplicity in zip(self.unique_rankings, self.multiplicities)
-        ])
-
-    @cached_property
-    def bordas(self):
-        """
-        ndarray: List of rankings in Borda format, with possible repetitions.
-        """
-        return np.vstack([
-            np.repeat([borda], multiplicity, axis=0)
-            for borda, multiplicity in zip(self.unique_bordas, self.multiplicities)
-        ])
 
     # Conversion to string
     # ====================
