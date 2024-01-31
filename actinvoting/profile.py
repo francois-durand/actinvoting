@@ -334,11 +334,16 @@ class Profile:
         ndarray: Weighted majority matrix. Coefficient `(c, d)` is the number of voters who prefer candidate `c` to
         candidate `d`. By convention, diagonal coefficients are set to 0.
         """
-        wmm = np.zeros((self.m, self.m), int)
-        for borda, multiplicity in self.d_borda_multiplicity.items():
-            borda = np.array(borda)
-            wmm += (borda[:, np.newaxis] > borda[np.newaxis, :]) * multiplicity
-        return wmm
+        # wmm = np.zeros((self.m, self.m), int)
+        # for borda, multiplicity in self.d_borda_multiplicity.items():
+        #     borda = np.array(borda)
+        #     wmm += (borda[:, np.newaxis] > borda[np.newaxis, :]) * multiplicity
+        # return wmm
+        return np.tensordot(
+            self.multiplicities,
+            self.unique_bordas[:, :, np.newaxis] > self.unique_bordas[:, np.newaxis, :],
+            axes=1
+        )
 
     @cached_property
     def majority_matrix(self):

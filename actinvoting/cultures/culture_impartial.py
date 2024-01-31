@@ -42,6 +42,7 @@ class CultureImpartial(Culture):
     def random_profile(self, n):
         return self._random_profile_using_random_borda(n)
 
+    @cached_property
     def average_profile(self):
         return self._average_profile_using_proba_ranking
 

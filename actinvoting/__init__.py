@@ -6,6 +6,7 @@ __version__ = '0.1.0'
 
 
 from actinvoting.cultures.culture import Culture
+from actinvoting.cultures.culture_from_profile import CultureFromProfile
 from actinvoting.cultures.culture_impartial import CultureImpartial
 from actinvoting.cultures.culture_mallows import CultureMallows
 from actinvoting.cultures.culture_perturbed import CulturePerturbed

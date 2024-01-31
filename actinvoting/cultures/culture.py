@@ -142,14 +142,14 @@ class Culture:
     @cached_property
     def _average_profile_using_proba_ranking(self):
         return Profile.from_d_ranking_multiplicity({
-            ranking: self.proba_ranking(ranking)
+            ranking: self.proba_ranking(np.array(ranking))
             for ranking in permutations(range(self.m))
         })
 
     @cached_property
     def _average_profile_using_proba_borda(self):
         return Profile.from_d_borda_multiplicity({
-            borda: self.proba_borda(borda)
+            borda: self.proba_borda(np.array(borda))
             for borda in permutations(range(self.m))
         })
 
