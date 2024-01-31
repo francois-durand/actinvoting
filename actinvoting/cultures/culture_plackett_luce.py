@@ -31,7 +31,7 @@ class CulturePlackettLuce(Culture):
         [4, 3, 1, 5, 0, 2]
     """
 
-    def __init__(self, values, seed):
+    def __init__(self, values, seed=None):
         super().__init__(m=len(values), seed=seed)
         self.values = np.array(values)
 
