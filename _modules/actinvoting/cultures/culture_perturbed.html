@@ -583,6 +583,10 @@ document.write(`
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random_profile_using_random_borda</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
 
 
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span> <span class="nf">average_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_average_profile_using_proba_ranking</span>
+
 <div class="viewcode-block" id="CulturePerturbed.proba_high_low">
 <a class="viewcode-back" href="../../../reference/culture_perturbed.html#actinvoting.CulturePerturbed.proba_high_low">[docs]</a>
     <span class="k">def</span> <span class="nf">proba_high_low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">):</span>

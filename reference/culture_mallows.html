@@ -412,6 +412,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="culture.html">Culture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="culture_from_profile.html">CultureFromProfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_impartial.html">CultureImpartial</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">CultureMallows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
@@ -564,6 +565,20 @@ distance 3) is 1/8 as frequent.</p>
 between two subset choice models. Psychometrika, 69(1), 33-54.</p>
 <p>Lu, T., &amp; Boutilier, C. (2014). Effective sampling and learning for Mallows models with pairwise-preference data.
 J. Mach. Learn. Res., 15(1), 3783-3829.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="actinvoting.CultureMallows.average_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">average_profile</span></span><a class="headerlink" href="#actinvoting.CultureMallows.average_profile" title="Link to this definition">#</a></dt>
+<dd><p>Average profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A profile where the weight for each ranking is the corresponding probability in the culture.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="profile.html#actinvoting.Profile" title="actinvoting.Profile">Profile</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="actinvoting.CultureMallows.proba_borda">
 <span class="sig-name descname"><span class="pre">proba_borda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borda</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/actinvoting/cultures/culture_mallows.html#CultureMallows.proba_borda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actinvoting.CultureMallows.proba_borda" title="Link to this definition">#</a></dt>
@@ -692,6 +707,7 @@ J. Mach. Learn. Res., 15(1), 3783-3829.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CultureMallows"><code class="docutils literal notranslate"><span class="pre">CultureMallows</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CultureMallows.average_profile"><code class="docutils literal notranslate"><span class="pre">CultureMallows.average_profile</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CultureMallows.proba_borda"><code class="docutils literal notranslate"><span class="pre">CultureMallows.proba_borda()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CultureMallows.proba_ranking"><code class="docutils literal notranslate"><span class="pre">CultureMallows.proba_ranking()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CultureMallows.random_borda"><code class="docutils literal notranslate"><span class="pre">CultureMallows.random_borda()</span></code></a></li>

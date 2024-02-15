@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/culture';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CultureImpartial" href="culture_impartial.html" />
+    <link rel="next" title="CultureFromProfile" href="culture_from_profile.html" />
     <link rel="prev" title="Reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -412,6 +412,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Culture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="culture_from_profile.html">CultureFromProfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_impartial.html">CultureImpartial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_mallows.html">CultureMallows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
@@ -491,6 +492,20 @@ document.write(`
 </ul>
 </dd>
 </dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="actinvoting.Culture.average_profile">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">average_profile</span></span><a class="headerlink" href="#actinvoting.Culture.average_profile" title="Link to this definition">#</a></dt>
+<dd><p>Average profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A profile where the weight for each ranking is the corresponding probability in the culture.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="profile.html#actinvoting.Profile" title="actinvoting.Profile">Profile</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="actinvoting.Culture.proba_borda">
 <span class="sig-name descname"><span class="pre">proba_borda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borda</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/actinvoting/cultures/culture.html#Culture.proba_borda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actinvoting.Culture.proba_borda" title="Link to this definition">#</a></dt>
@@ -617,11 +632,11 @@ those from <cite>lower</cite> are lower than <cite>c</cite>.</p>
       </div>
     </a>
     <a class="right-next"
-       href="culture_impartial.html"
+       href="culture_from_profile.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CultureImpartial</p>
+        <p class="prev-next-title">CultureFromProfile</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -642,6 +657,7 @@ those from <cite>lower</cite> are lower than <cite>c</cite>.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Culture"><code class="docutils literal notranslate"><span class="pre">Culture</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Culture.average_profile"><code class="docutils literal notranslate"><span class="pre">Culture.average_profile</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Culture.proba_borda"><code class="docutils literal notranslate"><span class="pre">Culture.proba_borda()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Culture.proba_high_low"><code class="docutils literal notranslate"><span class="pre">Culture.proba_high_low()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Culture.proba_ranking"><code class="docutils literal notranslate"><span class="pre">Culture.proba_ranking()</span></code></a></li>

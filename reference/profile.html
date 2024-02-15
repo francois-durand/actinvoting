@@ -412,6 +412,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="culture.html">Culture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="culture_from_profile.html">CultureFromProfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_impartial.html">CultureImpartial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_mallows.html">CultureMallows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
@@ -484,8 +485,8 @@ document.write(`
 <dd><p>A voting profile.</p>
 <p class="rubric">Examples</p>
 <p>A profile can be represented in several ways: a dictionary associating ranking to multiplicities (number of voters),
-an array of unique rankings and the corresponding vector of multiplicities, an array of possibly rankings with
-possible repetitions, as well as all these possibilities with Borda vectors instead of rankings.</p>
+an array of unique rankings and the corresponding vector of multiplicities, as well as both these possibilities
+with Borda vectors instead of rankings.</p>
 <p>You should avoid the default initialization method <cite>Profile(…)</cite>, because its syntax is quite likely to change
 over time. Instead, use the constructors which explicitly specify the input format:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Profile</span><span class="o">.</span><span class="n">from_d_ranking_multiplicity</span><span class="p">({(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span> <span class="mi">2</span><span class="p">})</span>
@@ -506,6 +507,8 @@ over time. Instead, use the constructors which explicitly specify the input form
 <span class="go">Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})</span>
 </pre></div>
 </div>
+<p>In the case where there is an integer number of voters for each ranking, you can also list the rankings or the
+Borda vectors with repetitions:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Profile</span><span class="o">.</span><span class="n">from_rankings</span><span class="p">([</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -535,21 +538,9 @@ over time. Instead, use the constructors which explicitly specify the input form
 <span class="go">       [1, 0, 2]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">unique_bordas</span>  <span class="c1"># DOCTEST: +ELLIPSIS</span>
 <span class="go">array([[2, 1, 0],</span>
-<span class="go">       [1, 2, 0]]...)</span>
+<span class="go">       [1, 2, 0]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">multiplicities</span>
 <span class="go">array([3, 2])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">rankings</span>
-<span class="go">array([[0, 1, 2],</span>
-<span class="go">       [0, 1, 2],</span>
-<span class="go">       [0, 1, 2],</span>
-<span class="go">       [1, 0, 2],</span>
-<span class="go">       [1, 0, 2]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">profile</span><span class="o">.</span><span class="n">bordas</span>  <span class="c1"># DOCTEST: +ELLIPSIS</span>
-<span class="go">array([[2, 1, 0],</span>
-<span class="go">       [2, 1, 0],</span>
-<span class="go">       [2, 1, 0],</span>
-<span class="go">       [1, 2, 0],</span>
-<span class="go">       [1, 2, 0]]...)</span>
 </pre></div>
 </div>
 <p>Features:</p>
@@ -620,17 +611,6 @@ over time. Instead, use the constructors which explicitly specify the input form
 <span class="go">False</span>
 </pre></div>
 </div>
-<dl class="py property">
-<dt class="sig sig-object py" id="actinvoting.Profile.bordas">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bordas</span></span><a class="headerlink" href="#actinvoting.Profile.bordas" title="Link to this definition">#</a></dt>
-<dd><p>List of rankings in Borda format, with possible repetitions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="actinvoting.Profile.condorcet_winner">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">condorcet_winner</span></span><a class="headerlink" href="#actinvoting.Profile.condorcet_winner" title="Link to this definition">#</a></dt>
@@ -865,17 +845,6 @@ opposite, 0.5 in case of tie, and 0.0 in case of defeat. By convention, diagonal
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="actinvoting.Profile.rankings">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rankings</span></span><a class="headerlink" href="#actinvoting.Profile.rankings" title="Link to this definition">#</a></dt>
-<dd><p>List of rankings with possible repetitions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="actinvoting.Profile.unique_bordas">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unique_bordas</span></span><a class="headerlink" href="#actinvoting.Profile.unique_bordas" title="Link to this definition">#</a></dt>
 <dd><p>List of unique rankings in Borda format, in the same order as <cite>unique_rankings</cite>.</p>
@@ -969,7 +938,6 @@ candidate <cite>d</cite>. By convention, diagonal coefficients are set to 0.</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile"><code class="docutils literal notranslate"><span class="pre">Profile</span></code></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.bordas"><code class="docutils literal notranslate"><span class="pre">Profile.bordas</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.condorcet_winner"><code class="docutils literal notranslate"><span class="pre">Profile.condorcet_winner</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.condorcet_winners"><code class="docutils literal notranslate"><span class="pre">Profile.condorcet_winners</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.d_borda_multiplicity"><code class="docutils literal notranslate"><span class="pre">Profile.d_borda_multiplicity</span></code></a></li>
@@ -990,7 +958,6 @@ candidate <cite>d</cite>. By convention, diagonal coefficients are set to 0.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.n"><code class="docutils literal notranslate"><span class="pre">Profile.n</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.nb_condorcet_winners"><code class="docutils literal notranslate"><span class="pre">Profile.nb_condorcet_winners</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.nb_weak_condorcet_winners"><code class="docutils literal notranslate"><span class="pre">Profile.nb_weak_condorcet_winners</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.rankings"><code class="docutils literal notranslate"><span class="pre">Profile.rankings</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.unique_bordas"><code class="docutils literal notranslate"><span class="pre">Profile.unique_bordas</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.unique_rankings"><code class="docutils literal notranslate"><span class="pre">Profile.unique_rankings</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.Profile.weak_condorcet_winners"><code class="docutils literal notranslate"><span class="pre">Profile.weak_condorcet_winners</span></code></a></li>

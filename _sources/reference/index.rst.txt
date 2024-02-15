@@ -5,6 +5,7 @@ Reference
 .. toctree::
 
    culture
+   culture_from_profile
    culture_impartial
    culture_mallows
    culture_perturbed

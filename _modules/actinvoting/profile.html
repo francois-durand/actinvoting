@@ -452,7 +452,9 @@ document.write(`
                   
   <h1>Source code for actinvoting.profile</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">actinvoting.util</span> <span class="kn">import</span> <span class="n">ranking_from_borda</span><span class="p">,</span> <span class="n">borda_from_ranking</span>
 <span class="kn">from</span> <span class="nn">actinvoting.util_cache</span> <span class="kn">import</span> <span class="n">cached_property</span>
 
@@ -466,8 +468,8 @@ document.write(`
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    A profile can be represented in several ways: a dictionary associating ranking to multiplicities (number of voters),</span>
-<span class="sd">    an array of unique rankings and the corresponding vector of multiplicities, an array of possibly rankings with</span>
-<span class="sd">    possible repetitions, as well as all these possibilities with Borda vectors instead of rankings.</span>
+<span class="sd">    an array of unique rankings and the corresponding vector of multiplicities, as well as both these possibilities</span>
+<span class="sd">    with Borda vectors instead of rankings.</span>
 
 <span class="sd">    You should avoid the default initialization method `Profile(...)`, because its syntax is quite likely to change</span>
 <span class="sd">    over time. Instead, use the constructors which explicitly specify the input format:</span>
@@ -485,6 +487,9 @@ document.write(`
 <span class="sd">        &gt;&gt;&gt; Profile.from_unique_bordas_and_multiplicities(</span>
 <span class="sd">        ...     unique_bordas=[[2, 1, 0], [1, 2, 0]], multiplicities=[3, 2])</span>
 <span class="sd">        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})</span>
+
+<span class="sd">    In the case where there is an integer number of voters for each ranking, you can also list the rankings or the</span>
+<span class="sd">    Borda vectors with repetitions:</span>
 
 <span class="sd">        &gt;&gt;&gt; Profile.from_rankings([</span>
 <span class="sd">        ...     [0, 1, 2],</span>
@@ -514,21 +519,9 @@ document.write(`
 <span class="sd">               [1, 0, 2]])</span>
 <span class="sd">        &gt;&gt;&gt; profile.unique_bordas  # DOCTEST: +ELLIPSIS</span>
 <span class="sd">        array([[2, 1, 0],</span>
-<span class="sd">               [1, 2, 0]]...)</span>
+<span class="sd">               [1, 2, 0]])</span>
 <span class="sd">        &gt;&gt;&gt; profile.multiplicities</span>
 <span class="sd">        array([3, 2])</span>
-<span class="sd">        &gt;&gt;&gt; profile.rankings</span>
-<span class="sd">        array([[0, 1, 2],</span>
-<span class="sd">               [0, 1, 2],</span>
-<span class="sd">               [0, 1, 2],</span>
-<span class="sd">               [1, 0, 2],</span>
-<span class="sd">               [1, 0, 2]])</span>
-<span class="sd">        &gt;&gt;&gt; profile.bordas  # DOCTEST: +ELLIPSIS</span>
-<span class="sd">        array([[2, 1, 0],</span>
-<span class="sd">               [2, 1, 0],</span>
-<span class="sd">               [2, 1, 0],</span>
-<span class="sd">               [1, 2, 0],</span>
-<span class="sd">               [1, 2, 0]]...)</span>
 
 <span class="sd">    Features:</span>
 
@@ -774,26 +767,6 @@ document.write(`
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">borda_from_ranking</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span> <span class="k">for</span> <span class="n">ranking</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">unique_rankings</span><span class="p">])</span>
 
-    <span class="nd">@cached_property</span>
-    <span class="k">def</span> <span class="nf">rankings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ndarray: List of rankings with possible repetitions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="n">ranking</span><span class="p">],</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">ranking</span><span class="p">,</span> <span class="n">multiplicity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_rankings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicities</span><span class="p">)</span>
-        <span class="p">])</span>
-
-    <span class="nd">@cached_property</span>
-    <span class="k">def</span> <span class="nf">bordas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ndarray: List of rankings in Borda format, with possible repetitions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="n">borda</span><span class="p">],</span> <span class="n">multiplicity</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">borda</span><span class="p">,</span> <span class="n">multiplicity</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unique_bordas</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplicities</span><span class="p">)</span>
-        <span class="p">])</span>
-
     <span class="c1"># Conversion to string</span>
     <span class="c1"># ====================</span>
 
@@ -834,11 +807,16 @@ document.write(`
 <span class="sd">        ndarray: Weighted majority matrix. Coefficient `(c, d)` is the number of voters who prefer candidate `c` to</span>
 <span class="sd">        candidate `d`. By convention, diagonal coefficients are set to 0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">wmm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">),</span> <span class="nb">int</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">borda</span><span class="p">,</span> <span class="n">multiplicity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_borda_multiplicity</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">borda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">borda</span><span class="p">)</span>
-            <span class="n">wmm</span> <span class="o">+=</span> <span class="p">(</span><span class="n">borda</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">borda</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:])</span> <span class="o">*</span> <span class="n">multiplicity</span>
-        <span class="k">return</span> <span class="n">wmm</span>
+        <span class="c1"># wmm = np.zeros((self.m, self.m), int)</span>
+        <span class="c1"># for borda, multiplicity in self.d_borda_multiplicity.items():</span>
+        <span class="c1">#     borda = np.array(borda)</span>
+        <span class="c1">#     wmm += (borda[:, np.newaxis] &gt; borda[np.newaxis, :]) * multiplicity</span>
+        <span class="c1"># return wmm</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">multiplicities</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unique_bordas</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">unique_bordas</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">axes</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
 
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">majority_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
