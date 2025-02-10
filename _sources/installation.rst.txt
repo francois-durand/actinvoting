@@ -8,13 +8,13 @@ Installation
 Stable release
 --------------
 
-To install Actinvoting (Analytic Combinatorics Tools In Voting), run this command in your terminal:
+To install Actinvoting, run this command in your terminal:
 
 .. code-block:: console
 
     $ pip install actinvoting
 
-This is the preferred method to install Actinvoting (Analytic Combinatorics Tools In Voting), as it will always install the most recent stable release.
+This is the preferred method to install Actinvoting, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -26,7 +26,7 @@ you through the process.
 From sources
 ------------
 
-The sources for Actinvoting (Analytic Combinatorics Tools In Voting) can be downloaded from the `Github repo`_.
+The sources for Actinvoting can be downloaded from the `Github repo`_.
 
 You can either clone the public repository:
 

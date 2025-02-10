@@ -1,0 +1,555 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "cc5b1f13-ab57-43bf-93d4-a642c31721fe",
+   "metadata": {},
+   "source": [
+    "# Tutorial"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "a8c66522-09e5-43c0-bd69-ee62874b5b27",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sympy\n",
+    "from actinvoting import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "19b5b010-1cb2-44ef-8677-af3142defc4a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# For a particular value of phi and rho, uncomment this:\n",
+    "phi = sympy.Rational(1, 2)\n",
+    "rho = - sympy.log(phi)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "a56e9607-59a6-4bf3-82af-88b3c908c995",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# For a formal variable rho, uncomment this:\n",
+    "# rho = sympy.symbols('rho')\n",
+    "# phi = sympy.exp(-rho)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "27c84b6d-a8e4-4014-b56b-522db54158bf",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\log{\\left(2 \\right)}$"
+      ],
+      "text/plain": [
+       "log(2)"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "rho"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "f40843dd-5987-4792-98cd-4be187a58e01",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\frac{1}{2}$"
+      ],
+      "text/plain": [
+       "1/2"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "phi"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "6b2dea7d-6353-4d54-b9e4-86be378cd274",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Uncomment this if you want the program to compute tau\n",
+    "tau = None\n",
+    "# Uncomment this if yout want to provide tau (this is mandatory for a formal variable rho)\n",
+    "# tau = [-3*rho/2, -rho/2, 1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "557c2e6a-2642-4ba4-a27d-0fd7e461cd9e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "culture = CultureMallows(m=3, phi=phi)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "79e3ab25-9c22-4970-a3a7-756bcd9f0457",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session = WorkSession(culture=culture, c=culture.m-1, tau=tau)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "d643ab01-630b-4a17-96ea-e8183ae18f76",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\frac{4 x_{0} x_{1}}{7} + \\frac{4 x_{0}}{21} + \\frac{2 x_{1}}{21} + \\frac{1}{7}$"
+      ],
+      "text/plain": [
+       "4*x_0*x_1/7 + 4*x_0/21 + 2*x_1/21 + 1/7"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.polynom_of_duels"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "7ee2fd6c-7161-4a7a-86da-15afd9c37a2b",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\log{\\left(\\frac{4 e^{t_{0}} e^{t_{1}}}{7} + \\frac{4 e^{t_{0}}}{21} + \\frac{2 e^{t_{1}}}{21} + \\frac{1}{7} \\right)}$"
+      ],
+      "text/plain": [
+       "log(4*exp(t_0)*exp(t_1)/7 + 4*exp(t_0)/21 + 2*exp(t_1)/21 + 1/7)"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.cumulant"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "b0935607-6f5a-437f-86a1-c8cd72c69b9d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\frac{t_{0}}{2} + \\frac{t_{1}}{2} - \\log{\\left(\\frac{4 e^{t_{0}} e^{t_{1}}}{7} + \\frac{4 e^{t_{0}}}{21} + \\frac{2 e^{t_{1}}}{21} + \\frac{1}{7} \\right)}$"
+      ],
+      "text/plain": [
+       "t_0/2 + t_1/2 - log(4*exp(t_0)*exp(t_1)/7 + 4*exp(t_0)/21 + 2*exp(t_1)/21 + 1/7)"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.psi"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "bcd52d7b-6464-4369-a317-1ea1966dfa6f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "-1.0397197856083966\n",
+      "-0.3465730498250196\n"
+     ]
+    }
+   ],
+   "source": [
+    "for j in session.adversaries:\n",
+    "    print(session.tau[j])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "fdf95c56-670e-4ec2-bfed-8c60a021c278",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0.353553738925390\n",
+      "0.707107163346013\n"
+     ]
+    }
+   ],
+   "source": [
+    "for j in session.adversaries:\n",
+    "    print(session.zeta[j])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "20400c76-71bf-4628-9e35-d4b586dc8f40",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{0, 1}"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.subcritical_candidates"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "id": "393a5cd6-429a-4307-9eed-01f4b6400738",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "set()"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.critical_candidates"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "8caaec68-437f-49eb-af3e-980f8779665c",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle 0.420401612355072$"
+      ],
+      "text/plain": [
+       "0.420401612355072"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.p_of_zeta"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "id": "2c80a568-2657-4632-bb68-4947ba2c2925",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\left[\\begin{matrix}0 & \\frac{4}{7}\\\\\\frac{4}{7} & 0\\end{matrix}\\right]$"
+      ],
+      "text/plain": [
+       "Matrix([\n",
+       "[  0, 4/7],\n",
+       "[4/7,   0]])"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.hessian_of_p_at_zeta"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "f7022efe-5343-4a98-9326-19ead8a16c9f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\left[\\begin{matrix}0.249999999999913 & 0.0898113794914426\\\\0.0898113794914426 & 0.24999999999995\\end{matrix}\\right]$"
+      ],
+      "text/plain": [
+       "Matrix([\n",
+       "[ 0.249999999999913, 0.0898113794914426],\n",
+       "[0.0898113794914426,   0.24999999999995]])"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.hessian_of_k_at_tau"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "f3235edc-dd44-46c3-ba42-d8e1a165e246",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\left[\\begin{matrix}\\frac{1}{4} & 0.0898116387143214\\\\0.0898116387143214 & \\frac{1}{4}\\end{matrix}\\right]$"
+      ],
+      "text/plain": [
+       "Matrix([\n",
+       "[               1/4, 0.0898116387143214],\n",
+       "[0.0898116387143214,                1/4]])"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.hessian_of_k_at_tau_computed_from_h_p_zeta"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "7854c019-e45a-4c95-ac58-6f33052a60b1",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle 0.0544339161138098$"
+      ],
+      "text/plain": [
+       "0.0544339161138098"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.det_hessian_of_k_at_tau"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "id": "a44df39b-381f-42f8-b000-ab3d37333287",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\left[\\begin{matrix}4.59272486435209 & -1.64991582276877\\\\-1.64991582276877 & 4.59272486435141\\end{matrix}\\right]$"
+      ],
+      "text/plain": [
+       "Matrix([\n",
+       "[ 4.59272486435209, -1.64991582276877],\n",
+       "[-1.64991582276877,  4.59272486435141]])"
+      ]
+     },
+     "execution_count": 21,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.inverse_of_hessian_of_k_at_tau"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "id": "3736f520-cfe4-4425-a5ae-5b4c2869ad4d",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle \\left[\\begin{matrix}\\end{matrix}\\right]$"
+      ],
+      "text/plain": [
+       "Matrix(0, 0, [])"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.matrix_m"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "2f3b7256-29f4-4c37-a124-68c96ccbcede",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1, 0)"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.integral_of_gaussian_m_with_error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "id": "5a83e6ac-183f-4529-bbfb-db9a8bb03c0e",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.integral_of_gaussian_m"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "f291f17b-e154-4930-8414-43ecd37d8832",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/latex": [
+       "$\\displaystyle 0.0159046899984387$"
+      ],
+      "text/plain": [
+       "0.0159046899984387"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "session.equivalent(n=10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a4d73dfc-e9f8-4d98-b9f1-b41e899ccb17",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

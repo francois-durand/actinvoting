@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>probability_monte_carlo &#8212; Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</title>
+    <title>probability_monte_carlo &#8212; Actinvoting 0.1.0 documentation</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
@@ -36,14 +36,14 @@
   <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="../_static/documentation_options.js?v=01f34227"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/probability_monte_carlo';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Profile" href="profile.html" />
-    <link rel="prev" title="CulturePlackettLuce" href="culture_plackett_luce.html" />
+    <link rel="prev" title="plot_speed_ic" href="plot_speed_ic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</p>
+    <p class="title logo__title">Actinvoting 0.1.0 documentation</p>
   
 </a></div>
     
@@ -139,7 +139,7 @@
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -159,8 +159,8 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -303,7 +303,7 @@ document.write(`
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -323,8 +323,8 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -417,9 +417,18 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="culture_mallows.html">CultureMallows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_plackett_luce.html">CulturePlackettLuce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalent_batch.html">equivalent_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_batch.html">exact_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mallows_three_first_theo.html">mallows_three_first_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mallows_three_last_theo.html">mallows_three_last_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monte_carlo_batch.html">monte_carlo_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="my_tikzplotlib_save.html">my_tikzplotlib_save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_simu_and_theo.html">plot_simu_and_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_speed_ic.html">plot_speed_ic</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">probability_monte_carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="profile.html">Profile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util.html">util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="work_session.html">WorkSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="work_session_ic_condorcet.html">WorkSessionICCondorcet</a></li>
 </ul>
 </div>
 </nav></div>
@@ -486,14 +495,14 @@ document.write(`
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>factory</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em> of </em><em>callable</em>) – <p>This can be:</p>
+<li><p><strong>factory</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em> of </em><em>callable</em>) – <p>This can be:</p>
 <ul>
 <li><p>Either a callable that takes no input and that outputs a (random) <cite>something</cite>,</p></li>
 <li><p>Or a tuple of such factories (cf. examples below).</p></li>
 </ul>
 </p></li>
-<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of samples.</p></li>
-<li><p><strong>test</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><em>tuple</em></a><em> of </em><em>callable</em>) – <p>This can be:</p>
+<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of samples.</p></li>
+<li><p><strong>test</strong> (<em>callable</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a><em> of </em><em>callable</em>) – <p>This can be:</p>
 <ul>
 <li><p>Either a function that take as input(s) the output(s) of the factory(ies) and that returns a Boolean.</p></li>
 <li><p>Or a tuple of such functions (cf. examples below).</p></li>
@@ -513,14 +522,14 @@ that it meets <cite>conditional_on</cite>, based on a Monte-Carlo estimation of 
 </p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
 <p>In this basic example with one factory, we estimate the probability that a random float between 0 and 1 is greater
 than .5, conditionally on being greater than .25:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rand_number</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">rand_number</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">probability_monte_carlo</span><span class="p">(</span><span class="n">factory</span><span class="o">=</span><span class="n">rand_number</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">test</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">conditional_on</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">.25</span><span class="p">)</span>
@@ -531,13 +540,13 @@ than .5, conditionally on being greater than .25:</p>
 of size 2, both with integer coefficients between -10 included and 11 excluded, have a dot product that is null,
 conditionally on not being null themselves:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rand_matrix</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">rand_matrix</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rand_vector</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">rand_vector</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_dot_zero</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_dot_zero</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">test_non_trivial</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">test_non_trivial</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">matrix</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">vector</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">probability_monte_carlo</span><span class="p">(</span><span class="n">factory</span><span class="o">=</span><span class="p">(</span><span class="n">rand_matrix</span><span class="p">,</span> <span class="n">rand_vector</span><span class="p">),</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">test</span><span class="o">=</span><span class="n">test_dot_zero</span><span class="p">,</span> <span class="n">conditional_on</span><span class="o">=</span><span class="n">test_non_trivial</span><span class="p">)</span>
@@ -547,7 +556,7 @@ conditionally on not being null themselves:</p>
 <p>In the following example, we estimate the probability that a random float between 0 and 1 is greater than .5,
 and the probability that it is greater than .75, conditionally on being greater than .25:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">rand_number</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">rand_number</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">probability_monte_carlo</span><span class="p">(</span><span class="n">factory</span><span class="o">=</span><span class="n">rand_number</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">test</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">.5</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">.75</span><span class="p">),</span> <span class="n">conditional_on</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">.25</span><span class="p">)</span>
@@ -570,12 +579,12 @@ and the probability that it is greater than .75, conditionally on being greater 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="culture_plackett_luce.html"
+       href="plot_speed_ic.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">CulturePlackettLuce</p>
+        <p class="prev-next-title">plot_speed_ic</p>
       </div>
     </a>
     <a class="right-next"
@@ -650,7 +659,7 @@ and the probability that it is greater than .75, conditionally on being greater 
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>

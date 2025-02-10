@@ -1,4 +1,0 @@
-util
-----
-
-.. automodule:: actinvoting.util

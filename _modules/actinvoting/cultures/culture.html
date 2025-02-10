@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>actinvoting.cultures.culture &#8212; Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</title>
+    <title>actinvoting.cultures.culture &#8212; Actinvoting 0.1.0 documentation</title>
   
   
   
@@ -27,7 +27,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
@@ -35,7 +35,7 @@
   <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="../../../_static/documentation_options.js?v=01f34227"></script>
-    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/actinvoting/cultures/culture';</script>
@@ -114,7 +114,7 @@
   
   
   
-    <p class="title logo__title">Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</p>
+    <p class="title logo__title">Actinvoting 0.1.0 documentation</p>
   
 </a></div>
     
@@ -136,7 +136,7 @@
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -156,8 +156,8 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../../../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -296,7 +296,7 @@ document.write(`
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../../../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -316,8 +316,8 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../../../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../../../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -451,25 +451,22 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <h1>Source code for actinvoting.cultures.culture</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutations</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sympy</span>
-<span class="kn">from</span> <span class="nn">more_itertools</span> <span class="kn">import</span> <span class="n">powerset</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">actinvoting.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
-<span class="kn">from</span> <span class="nn">actinvoting.util_cache</span> <span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">actinvoting.profile</span><span class="w"> </span><span class="kn">import</span> <span class="n">Profile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">actinvoting.util_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
 
 
 <div class="viewcode-block" id="Culture">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture">[docs]</a>
-<span class="k">class</span> <span class="nc">Culture</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Culture</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Culture: probabilistic model to generate rankings.</span>
 
-<span class="sd">    It is assumed here that all voters are independent.</span>
+<span class="sd">    It is assumed here that it is a &quot;General Independent Culture&quot; (GIC), i.e, voters have independent preferences.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -479,23 +476,20 @@ document.write(`
 <span class="sd">        Random seed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Culture.proba_ranking">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.proba_ranking">[docs]</a>
-    <span class="k">def</span> <span class="nf">proba_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proba_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ranking</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability of a ranking.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        ranking: List</span>
-<span class="sd">            A ranking.</span>
+<span class="sd">            A ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -507,14 +501,14 @@ document.write(`
 
 <div class="viewcode-block" id="Culture.proba_borda">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.proba_borda">[docs]</a>
-    <span class="k">def</span> <span class="nf">proba_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borda</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proba_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borda</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Probability of a ranking, given in Borda format.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        borda: List</span>
-<span class="sd">            A ranking in Borda format.</span>
+<span class="sd">            A ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -526,33 +520,33 @@ document.write(`
 
 <div class="viewcode-block" id="Culture.random_ranking">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.random_ranking">[docs]</a>
-    <span class="k">def</span> <span class="nf">random_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random ranking.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">            A random ranking.</span>
+<span class="sd">            A random ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
 <div class="viewcode-block" id="Culture.random_borda">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.random_borda">[docs]</a>
-    <span class="k">def</span> <span class="nf">random_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random ranking in Borda format.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
-<span class="sd">            A random ranking in Borda format.</span>
+<span class="sd">            A random ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_random_profile_using_random_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_random_profile_using_random_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile, using `random_borda` as subroutine.</span>
 
@@ -571,7 +565,7 @@ document.write(`
             <span class="n">d_borda_multiplicity</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_borda</span><span class="p">())]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">Profile</span><span class="o">.</span><span class="n">from_d_borda_multiplicity</span><span class="p">(</span><span class="n">d_borda_multiplicity</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_random_profile_using_random_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_random_profile_using_random_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile, using `random_ranking` as subroutine.</span>
 
@@ -592,7 +586,7 @@ document.write(`
 
 <div class="viewcode-block" id="Culture.random_profile">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.random_profile">[docs]</a>
-    <span class="k">def</span> <span class="nf">random_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">random_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile.</span>
 
@@ -606,25 +600,43 @@ document.write(`
 <span class="sd">        Profile</span>
 <span class="sd">            A random profile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># In a given subclass, this method typically calls either `_random_profile_using_random_ranking` or</span>
+        <span class="c1"># `_random_profile_using_random_borda`.</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 
     <span class="nd">@cached_property</span>
-    <span class="k">def</span> <span class="nf">_average_profile_using_proba_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_average_profile_using_proba_ranking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Average profile, using `proba_ranking` as subroutine.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Profile</span>
+<span class="sd">            A profile where the weight for each ranking is the corresponding probability in the culture.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Profile</span><span class="o">.</span><span class="n">from_d_ranking_multiplicity</span><span class="p">({</span>
             <span class="n">ranking</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">proba_ranking</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">ranking</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
         <span class="p">})</span>
 
     <span class="nd">@cached_property</span>
-    <span class="k">def</span> <span class="nf">_average_profile_using_proba_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_average_profile_using_proba_borda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Average profile, using `proba_borda` as subroutine.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Profile</span>
+<span class="sd">            A profile where the weight for each ranking is the corresponding probability in the culture.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Profile</span><span class="o">.</span><span class="n">from_d_borda_multiplicity</span><span class="p">({</span>
             <span class="n">borda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">proba_borda</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">borda</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">borda</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
         <span class="p">})</span>
 
     <span class="nd">@cached_property</span>
-    <span class="k">def</span> <span class="nf">average_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">average_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Average profile.</span>
 
@@ -633,23 +645,25 @@ document.write(`
 <span class="sd">        Profile</span>
 <span class="sd">            A profile where the weight for each ranking is the corresponding probability in the culture.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># In a given subclass, this method typically calls either `_average_profile_using_proba_ranking` or</span>
+        <span class="c1"># `_average_profile_using_proba_borda`.</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 <div class="viewcode-block" id="Culture.proba_high_low">
 <a class="viewcode-back" href="../../../reference/culture.html#actinvoting.Culture.proba_high_low">[docs]</a>
-    <span class="k">def</span> <span class="nf">proba_high_low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proba_high_low</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">higher</span><span class="p">,</span> <span class="n">lower</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Probability that a random ranking places candidate `c` below certain ones and above the other ones.</span>
+<span class="sd">        Probability that a random ranking places candidate `c` below certain adversaries and above the other ones.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        c: int</span>
 <span class="sd">            A candidate.</span>
 <span class="sd">        higher: Set</span>
-<span class="sd">            The candidates that should be higher.</span>
+<span class="sd">            The adversaries that should be higher than `c`.</span>
 <span class="sd">        lower: Set</span>
-<span class="sd">            The candidates that should be lower. Note that together, `c`, `higher` and `lower` must cover all the</span>
-<span class="sd">            candidates.</span>
+<span class="sd">            The adversaries that should be lower than `c`. Note that together, `c`, `higher` and `lower` must cover</span>
+<span class="sd">            all the candidates.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -662,44 +676,7 @@ document.write(`
             <span class="k">for</span> <span class="n">ranking_higher</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">higher</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">ranking_lower</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
         <span class="p">])</span></div>
-
-
-    <span class="k">def</span> <span class="nf">polynom_of_duels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
-        <span class="n">other_candidates</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="p">{</span><span class="n">c</span><span class="p">}</span>
-        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">proba_high_low</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">higher</span><span class="p">),</span> <span class="n">other_candidates</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">higher</span><span class="p">))</span> <span class="o">*</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">higher</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">higher</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">other_candidates</span><span class="p">)</span>
-        <span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">rational_fraction_condorcet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span>
-        <span class="n">other_candidates</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="p">{</span><span class="n">c</span><span class="p">}</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span><span class="o">**</span><span class="n">alpha</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">other_candidates</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">zeta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rational_fraction_condorcet</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
-        <span class="n">f_lambdified</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]],</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-
-        <span class="k">def</span> <span class="nf">f_vector_input</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">f_lambdified</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">f_vector_input</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-
-    <span class="k">def</span> <span class="nf">jacobian_of_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">tensor</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]])</span>
-
-    <span class="k">def</span> <span class="nf">hessian_of_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">symarray</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polynom_of_duels</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sympy</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="o">*</span><span class="n">x</span><span class="p">[:</span><span class="n">c</span><span class="p">],</span> <span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]])</span></div>
+</div>
 
 </pre></div>
 
@@ -751,7 +728,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>

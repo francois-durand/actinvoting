@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CulturePlackettLuce &#8212; Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</title>
+    <title>CulturePlackettLuce &#8212; Actinvoting 0.1.0 documentation</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
@@ -36,13 +36,13 @@
   <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script src="../_static/documentation_options.js?v=01f34227"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/culture_plackett_luce';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="probability_monte_carlo" href="probability_monte_carlo.html" />
+    <link rel="next" title="equivalent_batch" href="equivalent_batch.html" />
     <link rel="prev" title="CulturePerturbed" href="culture_perturbed.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -117,7 +117,7 @@
   
   
   
-    <p class="title logo__title">Actinvoting (Analytic Combinatorics Tools In Voting) 0.1.0 documentation</p>
+    <p class="title logo__title">Actinvoting 0.1.0 documentation</p>
   
 </a></div>
     
@@ -139,7 +139,7 @@
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -159,8 +159,8 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -303,7 +303,7 @@ document.write(`
     
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../readme.html">
-                        Actinvoting (Analytic Combinatorics Tools In Voting)
+                        Actinvoting
                       </a>
                     </li>
                 
@@ -323,8 +323,8 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutorials/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../notebooks/index.html">
+                        Notebooks
                       </a>
                     </li>
                 
@@ -417,9 +417,18 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="culture_mallows.html">CultureMallows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="culture_perturbed.html">CulturePerturbed</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">CulturePlackettLuce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="equivalent_batch.html">equivalent_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exact_batch.html">exact_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mallows_three_first_theo.html">mallows_three_first_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mallows_three_last_theo.html">mallows_three_last_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monte_carlo_batch.html">monte_carlo_batch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="my_tikzplotlib_save.html">my_tikzplotlib_save</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_simu_and_theo.html">plot_simu_and_theo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_speed_ic.html">plot_speed_ic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="probability_monte_carlo.html">probability_monte_carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="profile.html">Profile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util.html">util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="work_session.html">WorkSession</a></li>
+<li class="toctree-l1"><a class="reference internal" href="work_session_ic_condorcet.html">WorkSessionICCondorcet</a></li>
 </ul>
 </div>
 </nav></div>
@@ -482,7 +491,17 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="actinvoting.CulturePlackettLuce">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">actinvoting.</span></span><span class="sig-name descname"><span class="pre">CulturePlackettLuce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/actinvoting/cultures/culture_plackett_luce.html#CulturePlackettLuce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actinvoting.CulturePlackettLuce" title="Link to this definition">#</a></dt>
-<dd><p>Placket-Luce Culture.</p>
+<dd><p>Plackett-Luce Culture.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>List</em><em>[</em><em>sympy.Rational</em><em>]</em>) – Values of the Plackett-Luce model. The probability of a candidate to be ranked first is proportional to its
+value, the probability of the second candidate is proportional to its value divided by the sum of the
+remaining values, etc.</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Random seed.</p></li>
+</ul>
+</dd>
+</dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[</span>
 <span class="gp">... </span>    <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
@@ -497,10 +516,10 @@ document.write(`
 <span class="go">7/2550</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">proba_borda</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="go">7/2550</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">culture</span><span class="o">.</span><span class="n">random_ranking</span><span class="p">())</span>
-<span class="go">[3, 1, 4, 2, 0, 5]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">culture</span><span class="o">.</span><span class="n">random_borda</span><span class="p">())</span>
-<span class="go">[4, 3, 1, 5, 0, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">random_ranking</span><span class="p">()</span>
+<span class="go">array([3, 1, 4, 2, 0, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">culture</span><span class="o">.</span><span class="n">random_borda</span><span class="p">()</span>
+<span class="go">array([4, 3, 1, 5, 0, 2])</span>
 </pre></div>
 </div>
 <dl class="py property">
@@ -523,13 +542,13 @@ document.write(`
 <dd><p>Probability of a ranking, given in Borda format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>borda</strong> (<em>List</em>) – A ranking in Borda format.</p>
+<dd class="field-odd"><p><strong>borda</strong> (<em>List</em>) – A ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The probability to draw this ranking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or sympy expr</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or sympy expr</p>
 </dd>
 </dl>
 </dd></dl>
@@ -540,13 +559,13 @@ document.write(`
 <dd><p>Probability of a ranking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ranking</strong> (<em>List</em>) – A ranking.</p>
+<dd class="field-odd"><p><strong>ranking</strong> (<em>List</em>) – A ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The probability to draw this ranking.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a> or sympy expr</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a> or sympy expr</p>
 </dd>
 </dl>
 </dd></dl>
@@ -557,7 +576,7 @@ document.write(`
 <dd><p>Random ranking in Borda format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A random ranking in Borda format.</p>
+<dd class="field-odd"><p>A random ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>ndarray</p>
@@ -571,7 +590,7 @@ document.write(`
 <dd><p>Random profile.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Number of voters.</p>
+<dd class="field-odd"><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of voters.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A random profile.</p>
@@ -588,7 +607,35 @@ document.write(`
 <dd><p>Random ranking.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A random ranking.</p>
+<dd class="field-odd"><p>A random ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 &gt; 2 &gt; 1 &gt; 3.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="actinvoting.CulturePlackettLuce.values_normalized">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values_normalized</span></span><a class="headerlink" href="#actinvoting.CulturePlackettLuce.values_normalized" title="Link to this definition">#</a></dt>
+<dd><p>Normalized values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Normalized values, i.e., the values divided by the sum of the values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[sympy.Rational]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="actinvoting.CulturePlackettLuce.values_normalized_as_floats">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">values_normalized_as_floats</span></span><a class="headerlink" href="#actinvoting.CulturePlackettLuce.values_normalized_as_floats" title="Link to this definition">#</a></dt>
+<dd><p>Normalized values as floats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Normalized values (<cite>values_normalized</cite>) as floats.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>ndarray</p>
@@ -620,11 +667,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="probability_monte_carlo.html"
+       href="equivalent_batch.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">probability_monte_carlo</p>
+        <p class="prev-next-title">equivalent_batch</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -651,6 +698,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CulturePlackettLuce.random_borda"><code class="docutils literal notranslate"><span class="pre">CulturePlackettLuce.random_borda()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CulturePlackettLuce.random_profile"><code class="docutils literal notranslate"><span class="pre">CulturePlackettLuce.random_profile()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CulturePlackettLuce.random_ranking"><code class="docutils literal notranslate"><span class="pre">CulturePlackettLuce.random_ranking()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CulturePlackettLuce.values_normalized"><code class="docutils literal notranslate"><span class="pre">CulturePlackettLuce.values_normalized</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actinvoting.CulturePlackettLuce.values_normalized_as_floats"><code class="docutils literal notranslate"><span class="pre">CulturePlackettLuce.values_normalized_as_floats</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -699,7 +748,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>
