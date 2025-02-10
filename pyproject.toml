@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actinvoting"
-version = "0.1.0"
+version = "0.2.0"
 description = "Actinvoting uses mathematical tools from analytic combinatorics to compute probabilities in voting theory."
 authors = ["François Durand <fradurand@gmail.com>"]
 repository = "https://github.com/francois-durand/actinvoting"
