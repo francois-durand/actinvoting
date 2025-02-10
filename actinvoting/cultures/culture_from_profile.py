@@ -1,5 +1,3 @@
-from itertools import permutations
-
 from actinvoting.cultures.culture import Culture
 from actinvoting.profile import Profile
 from actinvoting.util_cache import cached_property
@@ -13,9 +11,31 @@ class CultureFromProfile(Culture):
     ----------
     base_profile: Profile
         Average profile. To each ranking, it associates the corresponding probability.
-    seed: float
+    seed: int
         Random seed.
+
+    Examples
+    --------
+    >>> profile = Profile.from_d_ranking_multiplicity({(0, 1, 2): .5, (1, 0, 2): .5})
+    >>> culture = CultureFromProfile(profile, seed=42)
+    >>> culture.proba_ranking((0, 1, 2))
+    0.5
+    >>> culture.proba_borda((2, 1, 0))
+    0.5
+    >>> culture.random_ranking()
+    array([1, 0, 2])
+    >>> culture.random_borda()
+    array([2, 1, 0])
+    >>> print(culture.random_profile(n=3))
+    Profile((0, 1, 2): 1,
+            (1, 0, 2): 2)
+    >>> print(culture.average_profile)
+    Profile((0, 1, 2): 0.5,
+            (1, 0, 2): 0.5)
+    >>> culture.proba_high_low(c=0, higher={1}, lower={2})
+    np.float64(0.5)
     """
+
     def __init__(self, base_profile, seed=None):
         super().__init__(m=base_profile.m, seed=seed)
         self.base_profile = base_profile

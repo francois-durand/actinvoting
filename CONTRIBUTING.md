@@ -29,8 +29,8 @@ and "help wanted" is open to whoever wants to implement it.
 
 ### Write Documentation
 
-Actinvoting (Analytic Combinatorics Tools In Voting) could always use more documentation, whether as part of the
-official Actinvoting (Analytic Combinatorics Tools In Voting) docs, in docstrings, or even on the web in blog posts,
+Actinvoting could always use more documentation, whether as part of the
+official Actinvoting docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 ### Submit Feedback

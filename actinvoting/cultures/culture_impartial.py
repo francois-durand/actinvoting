@@ -8,6 +8,13 @@ class CultureImpartial(Culture):
     """
     Impartial Culture.
 
+    Parameters
+    ----------
+    m: int
+        Number of candidates.
+    seed: int
+        Random seed.
+
     Examples
     --------
         >>> culture = CultureImpartial(m=6, seed=42)
@@ -15,13 +22,22 @@ class CultureImpartial(Culture):
         1/720
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
         1/720
-        >>> list(culture.random_ranking())
-        [3, 2, 5, 4, 1, 0]
-        >>> list(culture.random_borda())
-        [2, 4, 0, 1, 3, 5]
+        >>> culture.random_ranking()
+        array([3, 2, 5, 4, 1, 0])
+        >>> culture.random_borda()
+        array([2, 4, 0, 1, 3, 5])
+        >>> print(culture.random_profile(n=3))
+        Profile((0, 1, 3, 2, 5, 4): 1,
+                (0, 2, 4, 3, 5, 1): 1,
+                (4, 0, 3, 2, 5, 1): 1)
+        >>> culture.average_profile.exists_condorcet_order
+        False
         >>> culture.proba_high_low(c=0, higher=set(), lower={1, 2, 3, 4, 5})
         1/6
     """
+
+    def __repr__(self):
+        return f"IC_{self.m=}"
 
     @cached_property
     def _proba_any_ranking(self):

@@ -1,5 +1,5 @@
-Welcome to the documentation of Actinvoting (Analytic Combinatorics Tools In Voting)!
-=====================================================================================
+Welcome to the documentation of Actinvoting!
+============================================
 
 .. toctree::
    :maxdepth: 2
@@ -8,7 +8,7 @@ Welcome to the documentation of Actinvoting (Analytic Combinatorics Tools In Vot
    readme
    installation
    usage
-   tutorials/index
+   notebooks/index
    reference/index
    contributing
    authors

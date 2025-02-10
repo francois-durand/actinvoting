@@ -1,4 +1,4 @@
-# Actinvoting (Analytic Combinatorics Tools In Voting)
+# Actinvoting
 
 
 [![PyPI Status](https://img.shields.io/pypi/v/actinvoting.svg)](https://pypi.python.org/pypi/actinvoting)
@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/github/license/francois-durand/actinvoting)](https://github.com/francois-durand/actinvoting/blob/main/LICENSE)
 [![Code Coverage](https://codecov.io/gh/francois-durand/actinvoting/branch/main/graphs/badge.svg)](https://codecov.io/gh/francois-durand/actinvoting/tree/main)
 
-Actinvoting uses mathematical tools from analytic combinatorics to compute probabilities in voting theory...
+Actinvoting (Analytic Combinatorics Tools In Voting) uses mathematical tools from analytic combinatorics to compute probabilities in voting theory.
 
 
 - Free software: MIT license
@@ -16,7 +16,9 @@ Actinvoting uses mathematical tools from analytic combinatorics to compute proba
 
 ## Features
 
-- TODO
+- Estimate the probability that a candidate is a Condorcet winner (or more generally an alpha-winner) by different methods: theoretical equivalent obtained via analytic combinatorics, exact computation, or Monte Carlo estimate.
+- Implement different cultures such as Impartial Culture or the Mallows model.
+- Perform symbolic or numeric computations.
 
 ## Credits
 

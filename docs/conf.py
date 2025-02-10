@@ -58,7 +58,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = 'Actinvoting (Analytic Combinatorics Tools In Voting)'
+project = 'Actinvoting'
 copyright = "2024, François Durand"
 author = "François Durand"
 
@@ -155,7 +155,7 @@ latex_elements = {
 # [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'actinvoting.tex',
-     'Actinvoting (Analytic Combinatorics Tools In Voting) Documentation',
+     'Actinvoting Documentation',
      'François Durand', 'manual'),
 ]
 
@@ -166,7 +166,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     (master_doc, 'actinvoting',
-     'Actinvoting (Analytic Combinatorics Tools In Voting) Documentation',
+     'Actinvoting Documentation',
      [author], 1)
 ]
 
@@ -178,7 +178,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'actinvoting',
-     'Actinvoting (Analytic Combinatorics Tools In Voting) Documentation',
+     'Actinvoting Documentation',
      author,
      'actinvoting',
      'One line description of project.',

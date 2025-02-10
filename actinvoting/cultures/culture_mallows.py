@@ -10,7 +10,18 @@ class CultureMallows(Culture):
     """
     Mallows Culture.
 
-    The pole is ranking = [0, 1, 2, 3, ...], i.e. borda = [m-1, m-2, ...].
+    The pole (a.k.a. reference ranking) is ranking = [0, 1, 2, 3, ...], i.e. borda = [m-1, m-2, ...].
+
+    Parameters
+    ----------
+    m: int
+        Number of candidates.
+    phi: sympy.Rational
+        Concentration parameter. It must be in [0, 1]. In our paper, it is equal to `exp(-rho)`.
+        E.g., for phi = 1/2, i.e., for rho = log(2), the probability of a ranking at distance 1 from the pole
+        is halved.
+    seed: int
+        Random seed.
 
     Examples
     --------
@@ -55,10 +66,10 @@ class CultureMallows(Culture):
         1
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
         0
-        >>> list(culture.random_ranking())
-        [0, 1, 2, 3, 4, 5]
-        >>> list(culture.random_borda())
-        [5, 4, 3, 2, 1, 0]
+        >>> culture.random_ranking()
+        array([0, 1, 2, 3, 4, 5])
+        >>> culture.random_borda()
+        array([5, 4, 3, 2, 1, 0])
 
     Particular case of the Impartial Culture:
 
@@ -85,10 +96,10 @@ class CultureMallows(Culture):
         1/720
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
         1/720
-        >>> list(culture.random_ranking())
-        [5, 2, 3, 0, 1, 4]
-        >>> list(culture.random_borda())
-        [3, 4, 0, 2, 1, 5]
+        >>> culture.random_ranking()
+        array([5, 2, 3, 0, 1, 4])
+        >>> culture.random_borda()
+        array([3, 4, 0, 2, 1, 5])
 
     References
     ----------
@@ -103,16 +114,43 @@ class CultureMallows(Culture):
         super().__init__(m=m, seed=seed)
         self.phi = phi
 
+    def __repr__(self):
+        return f"Mallows_m={self.m}_phi={self.phi}"
+
     @cached_property
     def powers_of_phi(self):
+        """
+        Powers of phi.
+
+        Returns
+        -------
+        ndarray
+            [1, phi, phi^2, phi^3, ..., phi^(m-1)].
+        """
         return self.phi**np.arange(self.m)
 
     @cached_property
     def powers_of_phi_cumsum(self):
+        """
+        Cumulative sum of the powers of phi.
+
+        Returns
+        -------
+        ndarray
+            [1, 1+phi, 1+phi+phi^2, ..., 1+phi+phi^2+...+phi^(m-1)].
+        """
         return self.powers_of_phi.cumsum()
 
     @cached_property
     def d_candidate_insertion_probas(self):
+        """
+        Dictionary of candidate -> insertion probabilities.
+
+        Returns
+        -------
+        dict
+            Dictionary of candidate -> insertion probabilities.
+        """
         return {
             candidate: self.powers_of_phi[:candidate + 1] / self.powers_of_phi_cumsum[candidate]
             for candidate in range(self.m)
@@ -120,6 +158,14 @@ class CultureMallows(Culture):
 
     @cached_property
     def d_candidate_insertion_probas_as_floats(self):
+        """
+        Dictionary of candidate -> insertion probabilities as floats.
+
+        Returns
+        -------
+        dict
+            Dictionary of candidate -> insertion probabilities as floats.
+        """
         return {
             candidate: np.array(insertion_probas, dtype=float)
             for candidate, insertion_probas in self.d_candidate_insertion_probas.items()
@@ -127,6 +173,15 @@ class CultureMallows(Culture):
 
     @cached_property
     def normalization_constant(self):
+        """
+        Normalization constant of the Mallows distribution.
+
+        Returns
+        -------
+        sympy.Rational
+            Normalization constant of the Mallows distribution, equal the product of `powers_of_phi_cumsum`, i.e.,
+            (1) * (1+phi) * (1+phi+phi^2) * ... * (1+phi+phi^2+...+phi^(m-1)).
+        """
         return np.prod(self.powers_of_phi_cumsum)
 
     def proba_ranking(self, ranking):

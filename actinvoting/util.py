@@ -17,10 +17,10 @@ def borda_from_ranking(ranking):
 
     Examples
     --------
-        >>> list(borda_from_ranking([0, 1, 2, 3, 4, 5]))
-        [5, 4, 3, 2, 1, 0]
-        >>> list(borda_from_ranking([2, 5, 0, 1, 3, 4]))
-        [3, 2, 5, 1, 0, 4]
+        >>> borda_from_ranking([0, 1, 2, 3, 4, 5])
+        array([5, 4, 3, 2, 1, 0])
+        >>> borda_from_ranking([2, 5, 0, 1, 3, 4])
+        array([3, 2, 5, 1, 0, 4])
     """
     m = len(ranking)
     borda = np.zeros(m, int)
@@ -44,10 +44,10 @@ def ranking_from_borda(borda):
 
     Examples
     --------
-        >>> list(ranking_from_borda([5, 4, 3, 2, 1, 0]))
-        [0, 1, 2, 3, 4, 5]
-        >>> list(ranking_from_borda([3, 2, 5, 1, 0, 4]))
-        [2, 5, 0, 1, 3, 4]
+        >>> ranking_from_borda([5, 4, 3, 2, 1, 0])
+        array([0, 1, 2, 3, 4, 5])
+        >>> ranking_from_borda([3, 2, 5, 1, 0, 4])
+        array([2, 5, 0, 1, 3, 4])
     """
     m = len(borda)
     ranking = np.zeros(m, int)
@@ -72,11 +72,11 @@ def kendall_tau_id_ranking(ranking):
     Examples
     --------
         >>> kendall_tau_id_ranking([0, 1, 2, 3, 4, 5])
-        0
+        np.int64(0)
         >>> kendall_tau_id_ranking([1, 0, 2, 3, 4, 5])
-        1
+        np.int64(1)
         >>> kendall_tau_id_ranking([2, 5, 0, 1, 3, 4])
-        6
+        np.int64(6)
     """
     ranking = np.array(ranking)
     m = len(ranking)
@@ -100,11 +100,11 @@ def kendall_tau_id_borda(borda):
     Examples
     --------
         >>> kendall_tau_id_borda([5, 4, 3, 2, 1, 0])
-        0
+        np.int64(0)
         >>> kendall_tau_id_borda([4, 5, 3, 2, 1, 0])
-        1
+        np.int64(1)
         >>> kendall_tau_id_borda([3, 2, 5, 1, 0, 4])
-        6
+        np.int64(6)
     """
     borda = np.array(borda)
     m = len(borda)

@@ -2,9 +2,6 @@ from collections import defaultdict
 from itertools import permutations
 
 import numpy as np
-import sympy
-from more_itertools import powerset
-from scipy.optimize import minimize
 
 from actinvoting.profile import Profile
 from actinvoting.util_cache import cached_property
@@ -14,7 +11,7 @@ class Culture:
     """
     Culture: probabilistic model to generate rankings.
 
-    It is assumed here that all voters are independent.
+    It is assumed here that it is a "General Independent Culture" (GIC), i.e, voters have independent preferences.
 
     Parameters
     ----------
@@ -25,9 +22,6 @@ class Culture:
     """
 
     def __init__(self, m, seed=None):
-        """
-
-        """
         self.m = m
         self.rng = np.random.default_rng(seed)
 
@@ -38,7 +32,7 @@ class Culture:
         Parameters
         ----------
         ranking: List
-            A ranking.
+            A ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 > 2 > 1 > 3.
 
         Returns
         -------
@@ -54,7 +48,7 @@ class Culture:
         Parameters
         ----------
         borda: List
-            A ranking in Borda format.
+            A ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 > 2 > 1 > 3.
 
         Returns
         -------
@@ -70,7 +64,7 @@ class Culture:
         Returns
         -------
         ndarray
-            A random ranking.
+            A random ranking. E.g. [0, 2, 1, 3] corresponds to the preference ranking 0 > 2 > 1 > 3.
         """
         raise NotImplementedError
 
@@ -81,7 +75,7 @@ class Culture:
         Returns
         -------
         ndarray
-            A random ranking in Borda format.
+            A random ranking in Borda format. E.g. [3, 1, 2, 0] corresponds to the preference ranking 0 > 2 > 1 > 3.
         """
         raise NotImplementedError
 
@@ -137,10 +131,20 @@ class Culture:
         Profile
             A random profile.
         """
+        # In a given subclass, this method typically calls either `_random_profile_using_random_ranking` or
+        # `_random_profile_using_random_borda`.
         raise NotImplementedError
 
     @cached_property
     def _average_profile_using_proba_ranking(self):
+        """
+        Average profile, using `proba_ranking` as subroutine.
+
+        Returns
+        -------
+        Profile
+            A profile where the weight for each ranking is the corresponding probability in the culture.
+        """
         return Profile.from_d_ranking_multiplicity({
             ranking: self.proba_ranking(np.array(ranking))
             for ranking in permutations(range(self.m))
@@ -148,6 +152,14 @@ class Culture:
 
     @cached_property
     def _average_profile_using_proba_borda(self):
+        """
+        Average profile, using `proba_borda` as subroutine.
+
+        Returns
+        -------
+        Profile
+            A profile where the weight for each ranking is the corresponding probability in the culture.
+        """
         return Profile.from_d_borda_multiplicity({
             borda: self.proba_borda(np.array(borda))
             for borda in permutations(range(self.m))
@@ -163,21 +175,23 @@ class Culture:
         Profile
             A profile where the weight for each ranking is the corresponding probability in the culture.
         """
+        # In a given subclass, this method typically calls either `_average_profile_using_proba_ranking` or
+        # `_average_profile_using_proba_borda`.
         raise NotImplementedError
 
     def proba_high_low(self, c, higher, lower):
         """
-        Probability that a random ranking places candidate `c` below certain ones and above the other ones.
+        Probability that a random ranking places candidate `c` below certain adversaries and above the other ones.
 
         Parameters
         ----------
         c: int
             A candidate.
         higher: Set
-            The candidates that should be higher.
+            The adversaries that should be higher than `c`.
         lower: Set
-            The candidates that should be lower. Note that together, `c`, `higher` and `lower` must cover all the
-            candidates.
+            The adversaries that should be lower than `c`. Note that together, `c`, `higher` and `lower` must cover
+            all the candidates.
 
         Returns
         -------
@@ -190,40 +204,3 @@ class Culture:
             for ranking_higher in permutations(higher)
             for ranking_lower in permutations(lower)
         ])
-
-    def polynom_of_duels(self, c):
-        x = sympy.symarray("x", self.m)
-        candidates = set(range(self.m))
-        other_candidates = candidates - {c}
-        return sympy.Add(*[
-            self.proba_high_low(c, set(higher), other_candidates - set(higher)) * sympy.Mul(*[x[d] for d in higher])
-            for higher in powerset(other_candidates)
-        ])
-
-    def rational_fraction_condorcet(self, c, alpha=None):
-        if alpha is None:
-            alpha = [sympy.Rational(1, 2)] * self.m
-        x = sympy.symarray("x", self.m)
-        candidates = set(range(self.m))
-        other_candidates = candidates - {c}
-        return self.polynom_of_duels(c) / sympy.Mul(*[x[d]**alpha[d] for d in other_candidates])
-
-    def zeta(self, c, alpha=None):
-        x = sympy.symarray("x", self.m)
-        f = self.rational_fraction_condorcet(c=c, alpha=alpha)
-        f_lambdified = sympy.lambdify([*x[:c], *x[c + 1:]], f, "numpy")
-
-        def f_vector_input(v):
-            return f_lambdified(*v)
-        res = minimize(f_vector_input, [1.0] * (self.m - 1))
-        return res.x
-
-    def jacobian_of_p(self, c):
-        x = sympy.symarray("x", self.m)
-        p = self.polynom_of_duels(c=c)
-        return sympy.tensor.array.derive_by_array(p, [*x[:c], *x[c + 1:]])
-
-    def hessian_of_p(self, c):
-        x = sympy.symarray("x", self.m)
-        p = self.polynom_of_duels(c=c)
-        return sympy.hessian(p, [*x[:c], *x[c + 1:]])

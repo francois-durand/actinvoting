@@ -8,7 +8,16 @@ from actinvoting.util_cache import cached_property
 
 class CulturePlackettLuce(Culture):
     """
-    Placket-Luce Culture.
+    Plackett-Luce Culture.
+
+    Parameters
+    ----------
+    values: List[sympy.Rational]
+        Values of the Plackett-Luce model. The probability of a candidate to be ranked first is proportional to its
+        value, the probability of the second candidate is proportional to its value divided by the sum of the
+        remaining values, etc.
+    seed: int
+        Random seed.
 
     Examples
     --------
@@ -25,22 +34,41 @@ class CulturePlackettLuce(Culture):
         7/2550
         >>> culture.proba_borda([3, 2, 5, 1, 0, 4])
         7/2550
-        >>> list(culture.random_ranking())
-        [3, 1, 4, 2, 0, 5]
-        >>> list(culture.random_borda())
-        [4, 3, 1, 5, 0, 2]
+        >>> culture.random_ranking()
+        array([3, 1, 4, 2, 0, 5])
+        >>> culture.random_borda()
+        array([4, 3, 1, 5, 0, 2])
     """
 
     def __init__(self, values, seed=None):
         super().__init__(m=len(values), seed=seed)
         self.values = np.array(values)
 
+    def __repr__(self):
+        return f"Plackett_Luce_{self.values=}"
+
     @cached_property
     def values_normalized(self):
+        """
+        Normalized values.
+
+        Returns
+        -------
+        List[sympy.Rational]
+            Normalized values, i.e., the values divided by the sum of the values.
+        """
         return self.values / self.values.sum()
 
     @cached_property
     def values_normalized_as_floats(self):
+        """
+        Normalized values as floats.
+
+        Returns
+        -------
+        ndarray
+            Normalized values (`values_normalized`) as floats.
+        """
         return np.array(self.values_normalized, dtype=float)
 
     def proba_ranking(self, ranking):

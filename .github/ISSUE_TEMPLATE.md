@@ -1,4 +1,4 @@
-* Actinvoting (Analytic Combinatorics Tools In Voting) version:
+* Actinvoting version:
 * Python version:
 * Operating System:
 

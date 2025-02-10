@@ -10,6 +10,13 @@ class Profile:
     """
     A voting profile.
 
+    Parameters
+    ----------
+    d_ranking_multiplicity: dict
+        Key: ranking as a tuple. Value: multiplicity (number of voters, or weight).
+    d_borda_multiplicity: dict
+        Key: ranking in Borda format as a tuple. Value: multiplicity (number of voters, or weight).
+
     Examples
     --------
     A profile can be represented in several ways: a dictionary associating ranking to multiplicities (number of voters),
@@ -19,46 +26,52 @@ class Profile:
     You should avoid the default initialization method `Profile(...)`, because its syntax is quite likely to change
     over time. Instead, use the constructors which explicitly specify the input format:
 
-        >>> Profile.from_d_ranking_multiplicity({(0, 1, 2): 3, (1, 0, 2): 2})
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        >>> print(Profile.from_d_ranking_multiplicity({(0, 1, 2): 3, (1, 0, 2): 2}))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
-        >>> Profile.from_d_borda_multiplicity({(2, 1, 0): 3, (1, 2, 0): 2})
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        >>> print(Profile.from_d_borda_multiplicity({(2, 1, 0): 3, (1, 2, 0): 2}))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
-        >>> Profile.from_unique_rankings_and_multiplicities(
-        ...     unique_rankings=[[0, 1, 2], [1, 0, 2]], multiplicities=[3, 2])
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        >>> print(Profile.from_unique_rankings_and_multiplicities(
+        ...     unique_rankings=[[0, 1, 2], [1, 0, 2]], multiplicities=[3, 2]))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
-        >>> Profile.from_unique_bordas_and_multiplicities(
-        ...     unique_bordas=[[2, 1, 0], [1, 2, 0]], multiplicities=[3, 2])
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        >>> print(Profile.from_unique_bordas_and_multiplicities(
+        ...     unique_bordas=[[2, 1, 0], [1, 2, 0]], multiplicities=[3, 2]))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
     In the case where there is an integer number of voters for each ranking, you can also list the rankings or the
     Borda vectors with repetitions:
 
-        >>> Profile.from_rankings([
+        >>> print(Profile.from_rankings([
         ...     [0, 1, 2],
         ...     [0, 1, 2],
         ...     [0, 1, 2],
         ...     [1, 0, 2],
         ...     [1, 0, 2],
-        ... ])
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        ... ]))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
-        >>> Profile.from_bordas([
+        >>> print(Profile.from_bordas([
         ...     [2, 1, 0],
         ...     [2, 1, 0],
         ...     [2, 1, 0],
         ...     [1, 2, 0],
         ...     [1, 2, 0],
-        ... ])
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        ... ]))
+        Profile((0, 1, 2): 3,
+                (1, 0, 2): 2)
 
     When you have a profile, you can access all these basic ways of representing it:
 
         >>> profile = Profile.from_d_ranking_multiplicity({(0, 1, 2): 3, (1, 0, 2): 2})
         >>> profile.d_borda_multiplicity
-        {(2, 1, 0): 3, (1, 2, 0): 2}
+        {(np.int64(2), np.int64(1), np.int64(0)): 3, (np.int64(1), np.int64(2), np.int64(0)): 2}
         >>> profile.unique_rankings
         array([[0, 1, 2],
                [1, 0, 2]])
@@ -71,7 +84,7 @@ class Profile:
     Features:
 
         >>> profile
-        Profile(d_ranking_multiplicity={(0, 1, 2): 3, (1, 0, 2): 2})
+        Profile(d_ranking_multiplicity={(np.int64(0), np.int64(1), np.int64(2)): np.int64(3), (np.int64(1), np.int64(0), np.int64(2)): np.int64(2)})
         >>> print(profile)
         Profile((0, 1, 2): 3,
                 (1, 0, 2): 2)
@@ -90,17 +103,17 @@ class Profile:
         >>> profile.is_condorcet_winner
         array([ True, False, False])
         >>> profile.condorcet_winners
-        [0]
+        [np.int64(0)]
         >>> profile.condorcet_winner
-        0
+        np.int64(0)
         >>> profile.nb_condorcet_winners
         1
         >>> profile.exists_condorcet_winner
-        True
+        np.True_
         >>> profile.is_weak_condorcet_winner
         array([ True, False, False])
         >>> profile.weak_condorcet_winners
-        [0]
+        [np.int64(0)]
         >>> profile.nb_weak_condorcet_winners
         1
         >>> profile.exists_condorcet_order
@@ -126,11 +139,11 @@ class Profile:
         >>> profile.nb_condorcet_winners
         0
         >>> profile.exists_condorcet_winner
-        False
+        np.False_
         >>> profile.is_weak_condorcet_winner
         array([ True,  True, False])
         >>> profile.weak_condorcet_winners
-        [0, 1]
+        [np.int64(0), np.int64(1)]
         >>> profile.nb_weak_condorcet_winners
         2
         >>> profile.exists_condorcet_order
@@ -266,6 +279,9 @@ class Profile:
 
     @cached_property
     def unique_rankings_and_multiplicities(self):
+        """
+        Tuple: List of unique rankings and the corresponding vector of multiplicities.
+        """
         unique_rankings = np.array(sorted(self.d_ranking_multiplicity.keys()))
         multiplicities = np.array([
             self.d_ranking_multiplicity[tuple(ranking)]
@@ -306,7 +322,7 @@ class Profile:
 
     def __str__(self):
         s = ',\n        '.join([
-            f"{tuple(ranking)}: {multiplicity}"
+            f"{tuple([int(c) for c in ranking])}: {multiplicity}"
             for ranking, multiplicity in zip(self.unique_rankings, self.multiplicities)
         ])
         return f"Profile(" + s + ")"
@@ -341,7 +357,7 @@ class Profile:
         # return wmm
         return np.tensordot(
             self.multiplicities,
-            self.unique_bordas[:, :, np.newaxis] > self.unique_bordas[:, np.newaxis, :],
+            np.array(self.unique_bordas[:, :, np.newaxis] > self.unique_bordas[:, np.newaxis, :], dtype=int),
             axes=1
         )
 
